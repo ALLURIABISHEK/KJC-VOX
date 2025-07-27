@@ -13,7 +13,7 @@ import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
 import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 
 public class MongoUtil {
-    private static final String CONNECTION_STRING = "mongodb+srv://24mcab07:RadhaBhaskar%401@kjc-vox-cluster.ps4pwaz.mongodb.net/kjc_vox_portal?retryWrites=true&w=majority&appName=KJC-VOX-Cluster";
+    private static final String CONNECTION_STRING = "user your mongo URL";
     private static final String DB_NAME = "kjc_vox_portal";
     private static MongoClient client;
     private static MongoDatabase database;
