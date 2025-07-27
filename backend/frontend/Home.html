@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KJC VOX</title>
+    <style>
+        :root {
+          --primary-color: #2c3e50;
+          --accent-color: orange;
+          --text-color: #333;
+          --light-gray: #f5f5f5;
+        }
+
+        * {
+          box-sizing: border-box;
+          margin: 0;
+          padding: 0;
+        }
+
+        body {
+          font-family: Arial, sans-serif;
+          background-color: white;
+          color: var(--text-color);
+          display: flex;
+          flex-direction: column;
+          min-height: 100vh;
+        }
+
+        html {
+          scroll-behavior: smooth;
+        }
+
+        .topbar {
+          background-color: var(--light-gray);
+          padding: 8px 20px;
+          font-size: 14px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+
+        .navbar {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 15px 5%;
+          background-color: white;
+          box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
+          position: relative;
+          z-index: 1000;
+        }
+
+        .logo-container {
+          display: flex;
+          align-items: center;
+        }
+
+        .navbar img {
+          height: 50px;
+          margin-right: 10px;
+        }
+              .mobile-buttons {
+      display: none;
+    }
+
+
+        .navbar h2 {
+          margin: 0;
+          font-weight: bold;
+          color: var(--text-color);
+        }
+
+        .desktop-nav {
+          display: flex;
+          gap: 25px;
+          align-items: center;
+        }
+
+        .desktop-nav a {
+          text-decoration: none;
+          color: black;
+          font-weight: 500;
+          transition: all 0.3s ease;
+          padding: 8px 12px;
+          border-radius: 5px;
+        }
+
+        .desktop-nav a:hover {
+          background-color: var(--light-gray);
+          color: var(--primary-color);
+        }
+
+        .desktop-nav button {
+          padding: 8px 20px;
+          background-color: var(--primary-color);
+          color: white;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          font-weight: bold;
+          transition: all 0.3s ease;
+        }
+
+        .desktop-nav button:hover {
+          background-color: var(--accent-color);
+          transform: translateY(-2px);
+        }
+
+        /* Hamburger menu styles */
+        .hamburger {
+          display: none;
+          cursor: pointer;
+          padding: 10px;
+        }
+
+        .hamburger div {
+          width: 25px;
+          height: 3px;
+          background-color: var(--primary-color);
+          margin: 5px 0;
+          transition: all 0.3s ease;
+        }
+
+        .mobile-nav {
+          display: none;
+          position: absolute;
+          top: 100%;
+          left: 0;
+          width: 100%;
+          background-color: white;
+          box-shadow: 0px 5px 10px rgba(0,0,0,0.1);
+          z-index: 100;
+          padding: 20px;
+          flex-direction: column;
+          gap: 15px;
+        }
+
+        .mobile-nav a {
+          text-decoration: none;
+          color: var(--primary-color);
+          font-weight: 500;
+          padding: 10px;
+          border-bottom: 1px solid #eee;
+          transition: all 0.3s ease;
+        }
+
+        .mobile-nav a:hover {
+          background-color: var(--light-gray);
+          border-radius: 5px;
+        }
+
+        .mobile-nav.active {
+          display: flex;
+        }
+
+        .main-content {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+        }
+
+        .outer-wrapper {
+          flex: 1;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          padding: 30px 5%;
+        }
+
+        .content-box {
+          border: 3px solid var(--primary-color);
+          padding: 40px;
+          width: 100%;
+          max-width: 1400px;
+          border-radius: 10px;
+        }
+
+        .main-container {
+          display: flex;
+          gap: 60px;
+          align-items: center;
+          justify-content: space-between;
+        }
+
+        .text-block {
+          flex: 1;
+          min-width: 300px;
+        }
+
+        .text-block h1 {
+          font-size: 2.2rem;
+          margin-bottom: 15px;
+          line-height: 1.2;
+        }
+
+        .text-block p {
+          margin: 10px 0 25px 0;
+          font-size: 1.1rem;
+          color: #555;
+          font-weight: 500;
+        }
+
+        .info-box {
+          background-color: var(--primary-color);
+          color: white;
+          padding: 20px;
+          border-radius: 10px;
+          font-size: 1rem;
+          line-height: 1.6;
+          max-width: 500px;
+          margin-bottom: 20px;
+        }
+
+        .mobile-info {
+          display: none;
+        }
+
+        .choose-btn {
+          margin-top: 20px;
+          padding: 12px 30px;
+          background-color: white;
+          color: var(--primary-color);
+          border: 2px solid var(--primary-color);
+          border-radius: 6px;
+          font-weight: bold;
+          cursor: pointer;
+          font-size: 1rem;
+          transition: all 0.3s ease;
+        }
+
+        .choose-btn:hover {
+          background-color: var(--primary-color);
+          color: white;
+          transform: translateY(-2px);
+        }
+
+        .image-block {
+          flex: 1;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+
+        .image-block img {
+          width: 100%;
+          max-width: 600px;
+          height: auto;
+          border-radius: 8px;
+        }
+
+        /* Features Section */
+        .features-section {
+          padding: 80px 5%;
+          background-color: var(--light-gray);
+        }
+
+        .features-container {
+          max-width: 1200px;
+          margin: 0 auto;
+          text-align: center;
+        }
+
+        .features-container h2 {
+          font-size: 2.5rem;
+          margin-bottom: 20px;
+          color: var(--primary-color);
+        }
+
+        .features-container p {
+          font-size: 1.1rem;
+          margin-bottom: 50px;
+          color: #555;
+        }
+
+        .features-slider {
+          position: relative;
+          overflow: hidden;
+          border-radius: 10px;
+          box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .features-track {
+          display: flex;
+          transition: transform 0.5s ease;
+        }
+
+        .feature-slide {
+          min-width: 100%;
+          padding: 50px;
+          background-color: white;
+          display: flex;
+          align-items: center;
+          gap: 40px;
+        }
+
+        .feature-content {
+          flex: 1;
+        }
+
+        .feature-content h3 {
+          font-size: 2rem;
+          margin-bottom: 20px;
+          color: var(--primary-color);
+        }
+
+        .feature-content p {
+          font-size: 1.1rem;
+          line-height: 1.6;
+          color: #555;
+        }
+
+        .feature-icon {
+          flex: 0 0 150px;
+          height: 150px;
+          background-color: var(--primary-color);
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 4rem;
+          color: white;
+        }
+
+        .slider-indicators {
+          display: flex;
+          justify-content: center;
+          gap: 10px;
+          margin-top: 30px;
+        }
+
+        .indicator {
+          width: 12px;
+          height: 12px;
+          border-radius: 50%;
+          background-color: #ccc;
+          cursor: pointer;
+          transition: all 0.3s ease;
+        }
+
+        .indicator.active {
+          background-color: var(--primary-color);
+          transform: scale(1.2);
+        }
+
+        /* About Section */
+        .about-section {
+          padding: 80px 5%;
+          background-color: white;
+        }
+
+        .about-container {
+          max-width: 1200px;
+          margin: 0 auto;
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 60px;
+          align-items: center;
+        }
+
+        .about-content h2 {
+          font-size: 2.5rem;
+          margin-bottom: 30px;
+          color: var(--primary-color);
+        }
+
+        .about-content p {
+          font-size: 1.1rem;
+          line-height: 1.8;
+          margin-bottom: 20px;
+          color: #555;
+        }
+
+        .about-stats {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 30px;
+          margin-top: 40px;
+        }
+
+        .stat-item {
+          text-align: center;
+          padding: 20px;
+          background-color: var(--light-gray);
+          border-radius: 10px;
+          border: 2px solid var(--primary-color);
+          transition: all 0.3s ease;
+        }
+
+        .stat-item:hover {
+          background-color: var(--primary-color);
+          color: white;
+          transform: translateY(-5px);
+        }
+
+        .stat-number {
+          font-size: 2.5rem;
+          font-weight: bold;
+          color: var(--accent-color);
+        }
+
+        .stat-item:hover .stat-number {
+          color: white;
+        }
+
+        .stat-label {
+          font-size: 1rem;
+          margin-top: 10px;
+          font-weight: 500;
+        }
+
+        .about-image {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+
+        .about-image-placeholder {
+          width: 100%;
+          max-width: 500px;
+          height: 400px;
+          background-color: var(--primary-color);
+          border-radius: 15px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: white;
+          font-size: 1.2rem;
+          text-align: center;
+          position: relative;
+          overflow: hidden;
+        }
+
+        .about-image-placeholder::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+          opacity: 0.8;
+        }
+
+        .about-image-placeholder span {
+          position: relative;
+          z-index: 1;
+        }
+
+        .footer {
+          background-color: var(--primary-color);
+          color: white;
+          text-align: center;
+          padding: 20px;
+          margin-top: auto;
+        }
+
+        /* Tablet View */
+        @media (max-width: 1024px) {
+          .main-container {
+            gap: 40px;
+          }
+
+          .content-box {
+            padding: 30px;
+          }
+
+          .text-block h1 {
+            font-size: 1.8rem;
+          }
+
+          .features-container h2,
+          .about-content h2 {
+            font-size: 2rem;
+          }
+
+          .about-container {
+            gap: 40px;
+          }
+
+          .feature-slide {
+            flex-direction: column;
+            text-align: center;
+            padding: 40px;
+          }
+
+          .feature-icon {
+            flex: 0 0 120px;
+            height: 120px;
+            font-size: 3rem;
+          }
+        }
+
+         /* Mobile View */
+        @media (max-width: 768px) {
+          .navbar {
+            padding: 10px 15px;
+          }
+
+          .logo-container {
+            flex-direction: row;
+            align-items: center;
+          }
+
+          .navbar h2 {
+            font-size: 1.2rem;
+            white-space: nowrap;
+            margin-left: 5px;
+          }
+
+          .navbar img {
+            height: 35px;
+          }
+
+          .desktop-nav {
+            display: none;
+          }
+         .mobile-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 100%;
+            margin-top: 20px;
+          }
+
+          .mobile-buttons button {
+            padding: 12px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 0.9rem;
+            width: 100%;
+          }
+
+          .desktop-nav a {
+            display: none;
+          }
+
+          .hamburger {
+            display: block;
+          }
+
+          .outer-wrapper {
+            padding: 15px;
+          }
+
+          .content-box {
+            padding: 20px;
+            border-width: 2px;
+          }
+
+          .main-container {
+            flex-direction: column;
+            gap: 25px;
+          }
+
+          .text-block, .image-block {
+            width: 100%;
+          }
+
+          .image-block {
+            order: 1;
+          }
+
+          .text-block {
+            order: 2;
+          }
+
+          .info-box {
+            display: none;
+          }
+
+          .mobile-info {
+            display: block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 15px;
+          }
+
+          .choose-btn {
+            width: 100%;
+            padding: 10px;
+            font-size: 0.9rem;
+          }
+
+          .text-block h1 {
+            font-size: 1.4rem;
+            text-align: center;
+            margin-bottom: 10px;
+          }
+
+          .text-block p {
+            font-size: 0.95rem;
+            text-align: center;
+            margin-bottom: 20px;
+          }
+
+          /* Mobile Features */
+          .features-section {
+            padding: 40px 15px;
+          }
+
+          .features-container h2 {
+            font-size: 1.8rem;
+          }
+
+          .feature-slide {
+            padding: 30px 20px;
+            flex-direction: column;
+          }
+
+          .feature-icon {
+            flex: 0 0 100px;
+            height: 100px;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+          }
+
+          .feature-content h3 {
+            font-size: 1.5rem;
+          }
+
+          /* Mobile About */
+          .about-section {
+            padding: 40px 15px;
+          }
+
+          .about-container {
+            grid-template-columns: 1fr;
+            gap: 30px;
+          }
+
+          .about-content h2 {
+            font-size: 1.8rem;
+            text-align: center;
+          }
+
+          .about-stats {
+            grid-template-columns: 1fr;
+            gap: 20px;
+          }
+
+          .about-image-placeholder {
+            height: 250px;
+          }
+        }
+
+        /* Small Mobile View */
+        @media (max-width: 480px) {
+          .navbar {
+            padding: 10px 15px;
+          }
+
+          .navbar img {
+            height: 40px;
+          }
+
+          .content-box {
+            padding: 20px;
+          }
+
+          .text-block h1 {
+            font-size: 1.4rem;
+          }
+
+          .mobile-info {
+            font-size: 0.9rem;
+            padding: 12px;
+          }
+
+          .features-container h2,
+          .about-content h2 {
+            font-size: 1.6rem;
+          }
+
+          .feature-slide {
+            padding: 20px 15px;
+          }
+
+          .feature-content h3 {
+            font-size: 1.3rem;
+          }
+
+          .stat-number {
+            font-size: 2rem;
+          }
+        }
+    </style>
+</head>
+<body>
+<!-- Navbar -->
+<div class="navbar">
+    <div class="logo-container">
+        <img src="images/Kristu-Jayanti-College-Logo.png" alt="logo">
+        <h2>KJC <span style="color: var(--accent-color);">VOX</span></h2>
+    </div>
+    <div class="desktop-nav">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#features">Features</a>
+       <!-- <a href="login.html"><button>Login</button></a> -->
+        <a href="role.html"><button>Register</button></a>
+    </div>
+
+    <!-- Hamburger menu for mobile -->
+    <div class="hamburger" onclick="toggleMenu()">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+
+    <!-- Mobile navigation menu -->
+    <div class="mobile-nav" id="mobileNav">
+        <a href="#home" onclick="closeMenu()">Home</a>
+        <a href="#about" onclick="closeMenu()">About</a>
+        <a href="#features" onclick="closeMenu()">Features</a>
+    </div>
+</div>
+
+<!-- Main Content -->
+<div class="main-content">
+    <div class="outer-wrapper" id="home">
+        <div class="content-box">
+            <div class="main-container">
+                <!-- Image Block -->
+                <div class="image-block">
+                    <img src="images/Home-Page (Main Image).png" alt="Feedback Illustration">
+                </div>
+
+                <!-- Text Block -->
+                <div class="text-block">
+                    <h1>Welcome to <b style="color: black;">KJC <span style="color: var(--accent-color);">VOX!</span></b></h1>
+                    <p>A Safe space for Students to share honest feedback</p>
+
+                    <!-- Desktop version of info box -->
+                    <div class="info-box">
+                        KJC VOX is an institutional feedback platform <br>
+                        designed to facilitate anonymous, constructive <br>
+                        communication between students and faculty <br>
+                        at the institution.<br><br>
+                        It enables students to provide honest insights<br>
+                        on classroom experiences, while empowering <br>
+                        faculty and administrators with suitable feedback <br>
+                        to enhance academic quality.
+                    </div>
+
+                    <!-- Mobile version of info box -->
+                    <div class="mobile-info">
+                        KJC VOX is a platform for anonymous, constructive student feedback,
+                        enabling students to share classroom experiences and helping faculty
+                        and administrators improve academic quality.
+                    </div>
+
+                  <!--  <button class="choose-btn">Choose your role</button> -->
+                    <a href="role.html"><button class="choose-btn">Choose your role</button></a>
+
+                    <!-- Mobile buttons container -->
+                    <div class="mobile-buttons">
+                      <!--  <button>Login</button> -->
+                        <a href="role.html"><button>Register</button></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <section class="features-section" id="features">
+        <div class="features-container">
+            <h2>Our <span style="color: var(--accent-color);">Features</span></h2>
+            <p>Discover what makes KJC VOX the perfect feedback platform for your institution</p>
+
+            <div class="features-slider">
+                <div class="features-track" id="featuresTrack">
+                    <div class="feature-slide">
+                        <div class="feature-content">
+                            <h3>Anonymous Feedback</h3>
+                            <p>Share your honest thoughts and experiences without revealing your identity. Our platform ensures complete anonymity while maintaining the integrity of feedback, creating a safe space for students to express their genuine opinions about courses, faculty, and institutional services.</p>
+                        </div>
+                        <div class="feature-icon">🔒</div>
+                    </div>
+
+                    <div class="feature-slide">
+                        <div class="feature-content">
+                            <h3>Multi-Role Access</h3>
+                            <p>Separate dashboards for students, faculty, and admins with tailored tools.
+                            </p>
+                        </div>
+                        <div class="feature-icon">📊</div>
+                    </div>
+
+                    <div class="feature-slide">
+                        <div class="feature-content">
+                            <h3>Secure Platform</h3>
+                            <p>Built with industry-standard security measures to protect user privacy and data integrity. Our platform uses advanced encryption and secure protocols to ensure that all feedback remains confidential and protected from unauthorized access.</p>
+                        </div>
+                        <div class="feature-icon">🛡️</div>
+                    </div>
+
+                    <div class="feature-slide">
+                        <div class="feature-content">
+                            <h3>Easy Integration</h3>
+                            <p>Seamlessly integrate with existing institutional systems and workflows. Our platform is designed to work with various educational management systems, making it easy for institutions to adopt and implement without disrupting current processes.</p>
+                        </div>
+                        <div class="feature-icon">🔗</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slider-indicators">
+                <div class="indicator active" onclick="goToSlide(0)"></div>
+                <div class="indicator" onclick="goToSlide(1)"></div>
+                <div class="indicator" onclick="goToSlide(2)"></div>
+                <div class="indicator" onclick="goToSlide(3)"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section" id="about">
+        <div class="about-container">
+            <div class="about-content">
+                <h2>About KJC <span style="color: var(--accent-color);"> VOX</span></h2>
+                <p>KJC VOX was born from the need to bridge the communication gap between students and faculty at Kristu Jayanti College. Our platform represents a revolutionary approach to institutional feedback, creating a transparent and constructive environment for academic improvement.</p>
+
+                <p>We believe that honest feedback is the cornerstone of educational excellence. By providing a secure, anonymous platform, we empower students to share their genuine experiences while giving faculty and administrators the insights they need to enhance the learning environment.</p>
+
+                <p>Our mission is to foster a culture of continuous improvement, where every voice matters and every feedback contributes to building a better educational experience for all.</p>
+
+                <div class="about-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">1000+</div>
+                        <div class="stat-label">Active Users</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">50+</div>
+                        <div class="stat-label">Departments</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">5000+</div>
+                        <div class="stat-label">Feedback Submissions</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">98%</div>
+                        <div class="stat-label">User Satisfaction</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="about-image">
+                <div class="about-image-placeholder">
+                    <span>Our Vision:<br>Transforming Education<br>Through Feedback</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <div class="footer">
+        © KJC VOX. All rights reserved.
+    </div>
+</div>
+
+<script>
+    let currentSlide = 0;
+    const totalSlides = 4;
+    let autoSlideInterval;
+
+    function toggleMenu() {
+      const mobileNav = document.getElementById('mobileNav');
+      mobileNav.classList.toggle('active');
+
+      // Animate hamburger icon
+      const hamburger = document.querySelector('.hamburger');
+      hamburger.classList.toggle('active');
+    }
+
+    function closeMenu() {
+      const mobileNav = document.getElementById('mobileNav');
+      mobileNav.classList.remove('active');
+
+      const hamburger = document.querySelector('.hamburger');
+      hamburger.classList.remove('active');
+    }
+
+    function goToSlide(slideIndex) {
+      currentSlide = slideIndex;
+      const track = document.getElementById('featuresTrack');
+      track.style.transform = `translateX(-${slideIndex * 100}%)`;
+
+      // Update indicators
+      document.querySelectorAll('.indicator').forEach((indicator, index) => {
+        indicator.classList.toggle('active', index === slideIndex);
+      });
+    }
+
+    function nextSlide() {
+      currentSlide = (currentSlide + 1) % totalSlides;
+      goToSlide(currentSlide);
+    }
+
+    function startAutoSlide() {
+      autoSlideInterval = setInterval(nextSlide, 5000); // Change slide every 5 seconds
+    }
+
+    function stopAutoSlide() {
+      clearInterval(autoSlideInterval);
+    }
+
+    // Initialize auto-sliding
+    document.addEventListener('DOMContentLoaded', function() {
+      startAutoSlide();
+
+      // Pause auto-sliding when user hovers over the slider
+      const slider = document.querySelector('.features-slider');
+      slider.addEventListener('mouseenter', stopAutoSlide);
+      slider.addEventListener('mouseleave', startAutoSlide);
+    });
+
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+</script>
+</body>
+</html>

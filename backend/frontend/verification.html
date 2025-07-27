@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Verify Department - KJC VOX</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f2f7fb;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 30px;
+      background-color: #ffffff;
+      border-bottom: 2px solid #ddd;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+      position: relative;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      font-size: 28px;
+      font-weight: bold;
+      color: #2c3e50;
+    }
+
+    .logo img {
+      height: 40px;
+      margin-right: 8px;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+    }
+
+    .nav a {
+      padding: 12px 0;
+      width: 100%;
+      text-align: center;
+      text-decoration: none;
+      color: #2c3e50;
+      font-weight: 500;
+    }
+
+    .hamburger {
+      display: none;
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 20px auto;
+      background-color: #ffffff;
+      border: 3px solid #2d3e50;
+      box-sizing: border-box;
+      padding: 20px;
+    }
+
+    .verify-box {
+      max-width: 1000px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .verify-box h2 {
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+
+    .verify-box h2 span {
+      color: #fbbc04;
+    }
+
+    .verify-box p {
+      color: #4a4a4a;
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+
+    .content {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: flex-start;
+      margin-top: 20px;
+    }
+
+    .left-box {
+      width: 300px;
+      padding: 20px;
+      background-color: #f9fafc;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+    }
+
+    .left-box img {
+      width: 100%;
+      border-radius: 8px;
+    }
+
+    .left-box .student-name {
+      font-weight: 600;
+      font-size: 20px;
+      margin-top: 10px;
+    }
+
+    .left-box .student-id {
+      font-size: 16px;
+      color: #2c3e50;
+    }
+
+    .right-box {
+      flex-grow: 1;
+      text-align: left;
+      padding-left: 40px;
+      min-width: 280px;
+    }
+
+    .field {
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .field label {
+      font-weight: bold;
+      margin-right: 10px;
+      width: 120px;
+      text-align: right;
+    }
+
+    .field input {
+      padding: 8px;
+      flex-grow: 1;
+      min-width: 180px;
+      max-width: 400px;
+      border-radius: 6px;
+      border: 1px solid #aaa;
+      background-color: #f8f8f8;
+    }
+
+    .confirm-section {
+      margin-top: 30px;
+      text-align: center;
+    }
+
+    .confirm {
+      color: green;
+      font-size: 14px;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .confirm input[type="checkbox"] {
+      margin-right: 8px;
+    }
+
+    .btn-proceed {
+      background-color: #2c3e50;
+      color: white;
+      padding: 12px 30px;
+      border-radius: 6px;
+      cursor: pointer;
+      border: none;
+      font-size: 16px;
+      margin-right: 15px;
+    }
+
+    .btn-proceed:disabled {
+      background-color: #999;
+      cursor: not-allowed;
+    }
+
+    .report {
+      color: red;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .footer-container {
+      background-color: #2c3e50;
+      padding: 15px 0;
+      margin-top: 30px;
+    }
+
+    .footer {
+      text-align: center;
+      font-size: 14px;
+      color: #fff;
+    }
+
+    @media (max-width: 768px) {
+      .hamburger {
+        display: block;
+      }
+
+      .nav {
+        display: none;
+        flex-direction: column;
+        background-color: #fff;
+        position: absolute;
+        top: 60px;
+        right: 0;
+        left: 0;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      }
+
+      .nav.active {
+        display: flex;
+      }
+
+      .right-box {
+        padding-left: 0;
+      }
+
+      .container {
+        width: 90%;
+      }
+
+      .field {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .field label {
+        width: 100%;
+        text-align: left;
+        margin-bottom: 5px;
+      }
+
+      .field input {
+        width: 100%;
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <div class="logo">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXuH55vOVHO2LCF7rxvEYAfpEZqj3qvRuKnw&s" alt="KJC Logo">
+    <span>KJC <span style="color:#fbbc04;">VOX</span></span>
+  </div>
+
+  <div class="hamburger" onclick="toggleNav()">☰</div>
+
+  <div class="nav" id="navMenu">
+    <a href="#">Home</a>
+  </div>
+</div>
+
+<div class="container">
+  <div class="verify-box">
+    <h2>Verify your <span>Department</span></h2>
+    <p>Based on your registered email or student id, we’ve identified your department and semester.<br>Please review and confirm the information before proceeding</p>
+
+    <div class="content">
+      <div class="left-box">
+        <img src="images/verifi.jpg" alt="Graduation Cap">
+        <div class="student-name" id="studentName">Deeksha S</div>
+        <div class="student-id" id="studentId">24MCAA19</div>
+      </div>
+
+      <div class="right-box">
+        <div class="field">
+          <label>Email :</label>
+          <input type="text" id="email" readonly>
+        </div>
+        <div class="field">
+          <label>Department :</label>
+          <input type="text" id="department" readonly>
+        </div>
+        <div class="field">
+          <label>Course :</label>
+          <input type="text" id="course" readonly>
+        </div>
+        <div class="field">
+          <label>Semester :</label>
+          <input type="text" id="semester" readonly>
+        </div>
+        <div class="confirm-section">
+          <div class="confirm">
+            <input type="checkbox" id="confirmCheckbox">
+            <label for="confirmCheckbox">Is this information correct?</label>
+          </div>
+
+          <button class="btn-proceed" id="proceedButton" disabled>Yes, Proceed</button>
+          <span class="report">Report an Issue</span>
+        </div>
+
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="footer-container">
+  <div class="footer">
+    © KJC VOX. All rights reserved.
+  </div>
+</div>
+
+<script>
+  // Enable/disable proceed button based on checkbox
+ function toggleProceedButton() {
+     const checkbox = document.getElementById('confirmCheckbox');
+     const proceedButton = document.getElementById('proceedButton');
+     proceedButton.disabled = !checkbox.checked;
+ }
+
+ // Fetch and display student data
+ async function fetchAndDisplayStudentData() {
+     const email = localStorage.getItem("userEmail");
+     if (!email) {
+         alert("Session expired. Please login again.");
+         window.location.href = '/login.html';
+         return;
+     }
+
+     try {
+         const response = await fetch(`/api/verify-details?email=${encodeURIComponent(email)}`);
+         if (!response.ok) throw new Error('Failed to fetch student data');
+
+         const studentData = await response.json();
+
+         // Update UI
+         document.getElementById('studentName').textContent = studentData.name;
+         document.getElementById('studentId').textContent = studentData.rollnumber;
+         document.getElementById('email').value = studentData.email;
+         document.getElementById('department').value = studentData.department;
+         document.getElementById('course').value = studentData.course;
+         document.getElementById('semester').value = studentData.semester;
+     } catch (error) {
+         console.error("Error:", error);
+         alert("Failed to load student details");
+     }
+ }
+
+ // Handle verification submission
+ async function handleVerification() {
+     const email = localStorage.getItem("userEmail");
+     if (!email) {
+         alert("Session expired. Please login again.");
+         return;
+     }
+
+     if (!document.getElementById('confirmCheckbox').checked) {
+         alert("Please confirm the information is correct");
+         return;
+     }
+
+     try {
+         const response = await fetch('/api/finalize-verification', {
+             method: 'POST',
+             headers: { 'Content-Type': 'application/json' },
+             body: JSON.stringify({ email: email })
+         });
+
+         const result = await response.json();
+         if (result.success) {
+             alert("Verification completed successfully!");
+             window.location.href = '/dashboard.html';
+         } else {
+             alert("Verification failed: " + result.message);
+         }
+     } catch (error) {
+         console.error("Error:", error);
+         alert("Failed to complete verification");
+     }
+ }
+
+ // Initialize on page load
+ window.onload = function() {
+     fetchAndDisplayStudentData();
+
+     // Set up event listeners
+     document.getElementById('confirmCheckbox').addEventListener('change', toggleProceedButton);
+     document.getElementById('proceedButton').addEventListener('click', handleVerification);
+ };
+</script>
+
+
+</body>
+</html>
+
+
+
