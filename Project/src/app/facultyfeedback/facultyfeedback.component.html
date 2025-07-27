@@ -1,0 +1,50 @@
+<!-- Header -->
+<header class="flex justify-between items-center px-5 py-3 border-b-2 border-gray-300 bg-white">
+  <div class="flex items-center gap-3">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXuH55vOVHO2LCF7rxvEYAfpEZqj3qvRuKnw&s" class="w-10 h-10" alt="KJC Logo" />
+    <h1 class="text-xl font-bold text-gray-800">KJC <span class="text-yellow-500">VOX</span></h1>
+  </div>
+  <div class="w-10 h-10 rounded-full overflow-hidden">
+    <img src="assets\AdminIcon.jpg" class="w-full h-full object-cover" alt="Avatar" />
+  </div>
+</header>
+
+<!-- Main Content -->
+<main class="max-w-5xl mx-auto my-6 p-5 bg-white rounded-xl shadow-md border-2 border-gray-800">
+  <!-- Dropdown -->
+  <div class="mb-5">
+    <select [(ngModel)]="selectedMonth"
+      class="w-full sm:w-auto px-4 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-yellow-400">
+      <option *ngFor="let month of months" [value]="month">{{ month }}</option>
+    </select>
+  </div>
+
+  <!-- Title -->
+  <h2 class="text-center text-2xl sm:text-3xl font-bold text-gray-800 mb-6">
+    My <span class="text-yellow-500">Feedback</span>
+  </h2>
+
+  <!-- Feedback Content -->
+  <div class="flex flex-col md:flex-row gap-6">
+    <!-- Stats Cards -->
+    <div class="flex-1 space-y-4">
+      <div *ngFor="let stat of feedbackStats" class="border border-gray-300 rounded-lg p-4 shadow-sm bg-white">
+        <h3 class="text-base font-semibold text-gray-800">{{ stat.title }}</h3>
+        <p class="mt-2 font-bold text-gray-700">{{ stat.value }}</p>
+      </div>
+    </div>
+
+    <!-- Comments -->
+    <div class="flex-1 border border-gray-300 rounded-lg p-4 shadow-sm bg-white max-h-[350px] overflow-y-auto">
+      <h3 class="text-lg font-semibold text-gray-800 mb-3">Comments</h3>
+      <p *ngFor="let comment of comments" class="text-sm font-medium text-gray-700 mb-2">
+        {{ comment }}
+      </p>
+    </div>
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="text-center py-4 bg-[#2c3e50] text-white text-sm mt-10">
+  © KJC VOX. All rights reserved.
+</footer>

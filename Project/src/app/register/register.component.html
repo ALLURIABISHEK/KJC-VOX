@@ -1,0 +1,68 @@
+<!-- Outer Wrapper -->
+<div class="min-h-screen flex flex-col border-4 border-[#2f4254] bg-[#f6f8fc]">
+    <!-- Header -->
+    <header class="bg-white flex justify-between items-center px-6 py-4 shadow sticky top-0 z-50">
+      <div class="flex items-center gap-3">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXuH55vOVHO2LCF7rxvEYAfpEZqj3qvRuKnw&s" alt="College Logo" class="h-10" />
+        <span class="text-lg md:text-2xl font-bold text-[#2f4254]">
+          KJC <span class="text-[#f4a300]">VOX</span>
+        </span>
+      </div>
+  
+      <nav>
+        <ul [ngClass]="{ 'hidden': !menuOpen }" class="flex gap-4 md:flex md:static md:bg-transparent md:p-0 md:shadow-none flex-col md:flex-row absolute md:relative right-0 top-16 bg-white p-4 md:p-0 w-full md:w-auto">
+          <li><a routerLink="/home" class="text-[#2f4254] font-medium hover:bg-[#2f4254] hover:text-white px-3 py-2 rounded">Home</a></li>
+          <li><a routerLink="/login" class="text-[#2f4254] font-medium hover:bg-[#2f4254] hover:text-white px-3 py-2 rounded">Login</a></li>
+        </ul>
+  
+        <div class="hamburger md:hidden flex flex-col cursor-pointer" (click)="toggleMenu()">
+          <div class="w-6 h-1 bg-[#2f4254] my-1"></div>
+          <div class="w-6 h-1 bg-[#2f4254] my-1"></div>
+          <div class="w-6 h-1 bg-[#2f4254] my-1"></div>
+        </div>
+      </nav>
+    </header>
+  
+    <!-- Register Form Section -->
+    <main class="flex-1 flex justify-center items-center py-10 px-4 border-b-4 border-[#2f4254]">
+      <div class="flex flex-col md:flex-row w-full max-w-5xl bg-white rounded-lg overflow-hidden shadow border-2 border-[#2f4254]">
+        
+        <!-- Left -->
+        <div class="md:w-2/5 bg-white p-6 text-center">
+          <h2 class="text-xl md:text-2xl font-semibold mb-2">Register to KJC <span class="text-[#f4a300]">VOX</span></h2>
+          <p class="text-sm text-[#333]">Secure access for students, faculties & admins</p>
+          <img src="assets\Lock-IN.png" alt="Illustration" class="w-3/4 md:w-2/3 mx-auto my-4" />
+          <p class="text-sm text-[#2f4254] font-medium mb-2">A private, secure platform for honest feedback and academic reflection</p>
+        </div>
+  
+        <!-- Right -->
+        <div class="md:w-3/5 bg-[#2f4254] text-white p-6 flex flex-col justify-center">
+          <form (ngSubmit)="submitForm()" class="space-y-4">
+            <div>
+              <label class="block text-sm mb-1" for="name">Name</label>
+              <input [(ngModel)]="name" name="name" id="name" required class="w-full px-3 py-2 rounded border border-gray-300 text-black bg-[#f5f5f5]" placeholder="Full Name" />
+            </div>
+  
+            <div>
+              <label class="block text-sm mb-1" for="email">Email</label>
+              <input [(ngModel)]="email" name="email" type="email" id="email" required class="w-full px-3 py-2 rounded border border-gray-300 text-black bg-[#f5f5f5]" placeholder="name@kristujayanti.com" />
+            </div>
+  
+            <button type="button" (click)="sendCode()" class="w-full border border-white py-2 rounded hover:bg-white hover:text-[#2f4254] transition">Send Code</button>
+  
+            <div>
+              <label class="block text-sm mb-1" for="code">Enter Code</label>
+              <input [(ngModel)]="code" name="code" id="code" required class="w-full px-3 py-2 rounded border border-gray-300 text-black bg-[#f5f5f5]" placeholder="Enter verification code" />
+            </div>
+  
+            <button type="submit" class="w-full border border-white py-2 rounded hover:bg-white hover:text-[#2f4254] transition">Create Account</button>
+          </form>
+        </div>
+      </div>
+    </main>
+  
+    <!-- Footer -->
+    <footer class="bg-[#1c2a38] text-white text-center py-3 text-sm">
+      © KJC VOX. All rights reserved.
+    </footer>
+  </div>

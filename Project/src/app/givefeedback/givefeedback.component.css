@@ -1,0 +1,12 @@
+input[type="radio"]:checked + label {
+  color: #facc15 !important; /* Tailwind's yellow-400 */
+}
+
+label:hover,
+label:hover ~ label {
+  color: #facc15;
+}
+
+input[type="radio"] + label {
+  transition: color 0.2s ease;
+}

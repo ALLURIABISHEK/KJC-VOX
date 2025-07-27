@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>KJC VOX Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+    }
+  </style>
+</head>
+<body class="bg-[#f0f5f9] text-[#1a1a1a]">
+
+  <!-- Navbar -->
+  <header class="flex justify-between items-center bg-white px-8 py-4 shadow-md flex-nowrap">
+    <div class="flex items-center gap-2 text-[22px] whitespace-nowrap">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXuH55vOVHO2LCF7rxvEYAfpEZqj3qvRuKnw&s" alt="KJC VOX Logo" class="h-[45px]" />
+      <span class="text-[#1e3a56]">KJC <strong class="text-[#f4b400]">VOX</strong></span>
+    </div>
+    <div class="profile-icon">
+      <img src="assets\AdminIcon.jpg" alt="User Profile" class="h-[45px] rounded-full" />
+    </div>
+  </header>
+
+  <!-- Greeting Section -->
+  <section class="flex justify-between items-center gap-8 bg-[#1e3a56] text-white px-8 py-6 rounded-[15px] shadow-md my-5 mx-8 flex-nowrap flex-wrap md:flex-nowrap flex-col md:flex-row">
+    <div class="flex items-center gap-8 flex-1 flex-col md:flex-row text-center md:text-left">
+      <img src="assets\Facultysearch.png" alt="Clipboard Icon" class="h-[200px] md:h-[140px]" />
+      <div>
+<h1 class="text-[28px] md:text-[48px] font-bold">
+  Hello, Dr. {{ facultyName }}
+</h1>
+        <p>This is your personalized space on Vox to view student feedback, understand classroom sentiment, and respond to student concerns all in one place. Contribute meaningfully to academic excellence through insights that matter.</p>
+      </div>
+    </div>
+    <div class="bg-[#e0ecf4] text-[#1e3a56] rounded-[10px] p-5 w-full md:w-[420px] shadow-md mt-5 md:mt-0 text-center flex flex-col items-center">
+      <h3 class="text-[16px] font-semibold mb-2">Ready to reflect on your classroom?</h3>
+      <div class="flex justify-center flex-wrap md:flex-nowrap flex-col md:flex-row gap-3 w-full">
+        <div class="bg-[#1e3a56] text-white rounded-[10px] p-3 w-full md:w-[48%] text-center text-[12px] font-medium cursor-pointer shadow-sm hover:-translate-y-1 transition-transform">
+          <img src="assets\Facultyright1.png" alt="Feedback Icon" class="h-[60px] mb-2 mx-auto" />
+          <p>Start your feedback review for today</p>
+        </div>
+        <div class="bg-[#1e3a56] text-white rounded-[10px] p-3 w-full md:w-[48%] text-center text-[12px] font-medium cursor-pointer shadow-sm hover:-translate-y-1 transition-transform">
+          <img src="assets\facultyright2.png" alt="Insight Icon" class="h-[60px] mb-2 mx-auto" />
+          <p>Your classroom insights matter.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cards Section -->
+  <section class="grid gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mx-8 mb-6">
+    <div class="bg-white p-5 rounded-[15px] text-center text-[#1e3a56] font-semibold flex flex-col justify-center items-center h-[200px] hover:-translate-y-1 transition-transform">
+     <a routerLink="/faculty-subs" class="flex flex-col items-center cursor-pointer hover:scale-105 transition">
+  <img src="assets/adminsubjects.png" alt="All Subjects Icon" class="h-[100px]" />
+  <p class="mt-2 text-lg font-medium text-gray-700">All Subjects</p>
+</a>
+
+    </div>
+    <div class="bg-white p-5 rounded-[15px] text-center text-[#1e3a56] font-semibold flex flex-col justify-center items-center h-[200px] hover:-translate-y-1 transition-transform">
+      <img src="assets\Reports.png" alt="Report Issue Icon" class="h-[100px]" />
+      <p>Report Issue</p>
+    </div>
+    <div class="bg-white p-5 rounded-[15px] text-center text-[#1e3a56] font-semibold flex flex-col justify-center items-center h-[200px] hover:-translate-y-1 transition-transform">
+      <img src="assets\AdminPIE.png" alt="Sentiment Chart" class="h-[250px]" />
+    </div>
+    <div class="bg-white p-5 rounded-[15px] text-left shadow-md">
+      <h3 class="text-[16px] font-semibold text-[#1e3a56] mb-2">Today's Agenda</h3>
+      <ul class="list-none text-[14px] text-[#333] space-y-2">
+        <li>🕙 10:00 AM – NIS (MCA II A) 📍 Room 204 | 👥 60 Students</li>
+        <li>🕙 10:00 AM – NIS (MCA II A) 📍 Room 204 | 👥 60 Students</li>
+        <li>🕙 10:00 AM – NIS (MCA II A) 📍 Room 204 | 👥 60 Students</li>
+      </ul>
+    </div>
+    <div class="campus-image col-span-full">
+      <img src="assets\Width-KJC.png" alt="Campus" class="w-full block rounded-none" />
+    </div>
+  </section>
+
+  <!-- Announcements -->
+  <section class="flex justify-between items-start bg-white p-5 rounded-[15px] mx-8 shadow-md flex-col md:flex-row gap-5">
+    <div class="w-full md:w-auto">
+      <img src="assets\adminannounce.png" alt="Announcements" class="h-[180px] w-full md:w-auto object-contain" />
+    </div>
+    <div class="text-[#1e3a56] font-medium pl-5 flex-1 w-full md:w-auto">
+      <p class="flex items-center mb-2"> Haven’t submitted mood logs this week? <strong class="ml-1">Don’t forget to check in!</strong></p>
+      <p class="flex items-center mb-2">Semester feedback deadline is July 30, 2025. <strong class="ml-1">Submit before it closes!</strong></p>
+      <p class="flex items-center mb-2"> Your feedback is 100% anonymous and valuable. <strong class="ml-1">Let your voice be heard.</strong></p>
+      <p class="flex items-center mb-2"> Haven’t submitted mood logs this week? <strong class="ml-1">Don’t forget to check in!</strong></p>
+      <p class="flex items-center mb-2">Semester feedback deadline is July 30, 2025. <strong class="ml-1">Submit before it closes!</strong></p>
+    </div>
+    <div class="bg-[#1e3a56] text-white rounded-[10px] p-4 w-full md:w-[400px] mt-4 md:mt-0">
+      <div class="space-y-2">
+        <p class="flex items-center">Department fest : <strong class="ml-1">Shells 2025 coming this July….Stay tuned!</strong></p>
+        <p class="flex items-center">Class review meetings for : <strong class="ml-1">Semester start on July 5th</strong></p>
+        <p class="flex items-center"> Department fest : <strong class="ml-1">Shells 2025 coming this July….Stay tuned!</strong></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="text-center py-4 bg-[#1e3a56] text-white text-sm mt-6">
+    © KJC VOX. All rights reserved.
+  </footer>
+
+</body>
+</html>

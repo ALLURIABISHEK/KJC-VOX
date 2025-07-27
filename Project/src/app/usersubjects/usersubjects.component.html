@@ -1,0 +1,45 @@
+<!-- tailwind-enabled version -->
+<header class="flex justify-between items-center bg-white px-5 py-4 border-b border-gray-300">
+  <div class="flex items-center gap-3">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXuH55vOVHO2LCF7rxvEYAfpEZqj3qvRuKnw&s" alt="KJC Logo" class="h-10 sm:h-8" />
+    <h1 class="text-2xl text-gray-800 font-semibold">KJC <span class="text-yellow-500">VOX</span></h1>
+  </div>
+  <div class="profile-icon">
+    <img src="assets\AdminIcon.jpg" alt="Profile" class="h-10 sm:h-8 rounded-full border-2 border-yellow-500" />
+  </div>
+</header>
+
+<main class="p-5 flex-grow bg-gray-100 min-h-screen font-['Roboto']">
+  <div class="bg-white p-5 rounded-xl shadow-md">
+    <h2 class="text-2xl font-semibold mb-2">My <span class="text-yellow-500">Subjects</span></h2>
+    <p class="font-bold mb-5">Course: Master's of Computer Application [MCA]</p>
+
+    <div *ngIf="subjects.length === 0">
+      <p>No subjects found.</p>
+    </div>
+
+    <div *ngFor="let subject of subjects; let i = index"
+         class="flex flex-wrap sm:flex-nowrap items-start sm:items-center gap-4 bg-gray-100 rounded-xl p-4 mb-4">
+      <span class="w-8 h-8 flex items-center justify-center border-2 border-gray-300 rounded-full font-bold text-gray-800">{{ i + 1 }}</span>
+      <div class="flex-1 min-w-[220px]">
+        <p><strong>Course Title:</strong> {{ subject.name }}
+          <span class="italic text-sm text-gray-700">(Course Code - {{ subject.courseCode }})</span>
+        </p>
+<p class="text-gray-600 font-bold">
+  {{ subject.assignedFaculty || 'Not yet assigned' }}
+</p>
+      </div>
+<a [routerLink]="['/givefeedback']" [queryParams]="{ subject: subject.name, courseCode: subject.courseCode, faculty: subject.assignedFaculty }">
+  <button class="...">
+    Give Feedback
+  </button>
+</a>
+
+
+    </div>
+  </div>
+</main>
+
+<footer class="text-center text-white text-sm py-4 bg-[#1e2b38] border-t-4 border-[#0f1a24]">
+  <p>© KJC VOX. All rights reserved.</p>
+</footer>

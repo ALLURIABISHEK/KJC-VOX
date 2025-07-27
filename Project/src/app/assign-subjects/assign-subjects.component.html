@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Assigning Subjects</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+<body class="bg-white text-[#1e2a3b] font-[Segoe UI]">
+
+  <!-- Top bar with logo and avatar -->
+  <div class="flex justify-between items-center bg-gray-100 px-5 py-3 border-b border-gray-300">
+    <div class="flex items-center gap-3">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXuH55vOVHO2LCF7rxvEYAfpEZqj3qvRuKnw&s" alt="KJC Logo" class="h-11">
+      <span class="text-2xl font-bold text-[#1e2a3b]">KJC <strong class="text-yellow-400">VOX</strong></span>
+    </div>
+    <button class="border-none bg-none cursor-pointer">
+      <img src="assets/AdminIcon.jpg" alt="Avatar" class="w-10 h-10 rounded-full object-cover">
+    </button>
+  </div>
+
+  <div class="max-w-3xl mx-auto mt-8 p-10 border-2 border-[#0f1b3d] rounded-lg shadow-md bg-white">
+    <h2 class="text-2xl font-bold text-center mb-10">Assigning <span class="text-yellow-400">Subjects</span></h2>
+    <form (ngSubmit)="submitAssignment()">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+        <div class="flex flex-col">
+          <label class="mb-2 font-semibold">Department Name</label>
+          <input type="text" [value]="departmentName" disabled class="p-3 border border-gray-300 rounded-lg bg-gray-50" />
+        </div>
+
+        <div class="flex flex-col">
+          <label class="mb-2 font-semibold">Department Type</label>
+          <input type="text" [value]="departmentType" disabled class="p-3 border border-gray-300 rounded-lg bg-gray-50" />
+        </div>
+
+        <div class="flex flex-col">
+          <label class="mb-2 font-semibold">Class</label>
+          <select [(ngModel)]="className" name="className" (change)="onClassChange()" class="p-3 border border-gray-300 rounded-lg bg-gray-50">
+            <option *ngFor="let c of ['1MCA-A','1MCA-B','1MCA-C','1MCA-D','2MCA-A','2MCA-B','2MCA-C','2MCA-D','1MSC-A','1MSC-B','1MSC-C','1MSC-D','2MSC-A','2MSC-B','2MSC-C','2MSC-D']" [value]="c">{{ c }}</option>
+          </select>
+        </div>
+
+        <div class="flex flex-col">
+          <label class="mb-2 font-semibold">Semester</label>
+          <select [(ngModel)]="semester" name="semester" class="p-3 border border-gray-300 rounded-lg bg-gray-50">
+            <option [value]="1">I</option>
+            <option [value]="2">II</option>
+            <option [value]="3">III</option>
+            <option [value]="4">IV</option>
+          </select>
+        </div>
+
+        <div class="flex flex-col md:col-span-2">
+          <label class="mb-2 font-semibold">Faculty</label>
+          <select [(ngModel)]="selectedFaculty" name="faculty" class="p-3 border border-gray-300 rounded-lg bg-gray-50">
+            <option *ngFor="let faculty of facultyList" [value]="faculty.fullName">{{ faculty.fullName }}</option>
+          </select>
+        </div>
+
+        <div class="flex flex-col md:col-span-2">
+          <label class="mb-2 font-semibold">Subjects</label>
+          <div *ngIf="subjectList.length > 0" class="flex flex-col gap-2">
+            <label *ngFor="let subject of subjectList" class="inline-flex items-center gap-2">
+              <input type="checkbox" [value]="subject" (change)="toggleSubject(subject)" [checked]="selectedSubjects.includes(subject)" class="form-checkbox text-blue-600" />
+              {{ subject }}
+            </label>
+          </div>
+          <div *ngIf="subjectList.length === 0" class="text-sm text-gray-500 mt-2">
+            <p>No subjects available for this class</p>
+          </div>
+        </div>
+      </div>
+
+      <button type="submit" class="block mx-auto bg-[#0f1b3d] text-white px-6 py-3 text-sm font-bold rounded-md shadow-md hover:bg-[#1f2d50]">SUBMIT</button>
+    </form>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-[#1e2a3b] text-white text-center py-4 mt-10 text-sm">
+    © KJC VOX. All rights reserved.
+  </footer>
+
+</body>
+</html>

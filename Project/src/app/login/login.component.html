@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KJC VOX Login</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-[#f6f8fc] flex flex-col min-h-screen font-sans">
+
+  <header class="bg-white flex justify-between items-center px-6 py-4 shadow relative">
+    <div class="flex items-center gap-2">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXuH55vOVHO2LCF7rxvEYAfpEZqj3qvRuKnw&s" alt="Logo" class="h-10" />
+      <span class="text-xl font-bold">KJC <span class="text-[#f4a300]">VOX</span></span>
+    </div>
+
+    <nav class="hidden md:flex items-center gap-4">
+      <a href="/home" class="text-[#2f4254] font-medium">Home</a>
+      <a href="/register">
+        <button class="bg-[#2f4254] text-white font-semibold px-4 py-2 rounded-md">Register</button>
+      </a>
+    </nav>
+
+    <!-- Hamburger for mobile -->
+    <div class="flex md:hidden flex-col gap-1 cursor-pointer" (click)="toggleMenu()">
+      <span class="w-6 h-[3px] bg-[#2f4254] rounded"></span>
+      <span class="w-6 h-[3px] bg-[#2f4254] rounded"></span>
+      <span class="w-6 h-[3px] bg-[#2f4254] rounded"></span>
+    </div>
+
+    <div class="absolute top-full left-0 w-full bg-white shadow border-t border-gray-200 flex-col md:hidden hidden" [class.show]="isMobileMenuOpen">
+      <a href="/home" class="px-5 py-4 border-b border-gray-200 text-[#2f4254]" (click)="closeMobileMenu()">Home</a>
+      <a href="/register" class="px-5 py-4 border-b border-gray-200 text-[#2f4254]" (click)="closeMobileMenu()">Register</a>
+    </div>
+  </header>
+
+  <main class="flex-1 flex justify-center items-center px-5 py-10">
+    <div class="flex flex-col md:flex-row bg-white w-full max-w-[1100px] rounded-lg overflow-hidden shadow border border-gray-300">
+      
+      <!-- Left -->
+      <div class="md:flex-[0.8] p-8 md:p-10 text-center border-b md:border-b-0 md:border-r border-gray-300">
+        <h2 class="text-2xl font-semibold mb-2">Login to KJC <span class="text-[#f4a300]">VOX</span></h2>
+        <p class="text-sm text-gray-700">Secure access for students, faculties & admins</p>
+        <img src="assets/Lock-IN.png" alt="Illustration" class="w-full max-w-sm mx-auto my-6" />
+        <p class="text-sm text-[#2f4254] font-medium">A private, secure platform for honest feedback and academic reflection</p>
+      </div>
+
+      <!-- Right -->
+      <div class="md:flex-[1.4] bg-[#2f4254] text-white p-8 md:p-10 flex flex-col justify-center">
+        <form #loginForm="ngForm" (ngSubmit)="submitLoginForm()" novalidate class="w-full">
+          
+          <!-- Email -->
+          <div class="mb-4">
+            <label for="email" class="block mb-1 text-sm">Email</label>
+            <input 
+              type="email"
+              id="email"
+              name="email"
+              [(ngModel)]="email"
+              placeholder="name@kristujayanti.com"
+              required
+              #emailInput="ngModel"
+              [class.border-red-500]="emailInput.invalid && emailInput.touched"
+              class="w-full px-3 py-2 rounded-md text-black bg-gray-100 border border-gray-300 focus:outline-none"
+            />
+            <div *ngIf="emailInput.invalid && emailInput.touched" class="text-sm text-red-200 mt-1">
+              <span *ngIf="emailInput.errors?.['required']">Email is required</span>
+              <span *ngIf="emailInput.errors?.['email']">Please enter a valid email</span>
+            </div>
+          </div>
+
+          <!-- Password -->
+          <div class="mb-4">
+            <label for="password" class="block mb-1 text-sm">Password</label>
+            <input 
+              type="password"
+              id="password"
+              name="password"
+              [(ngModel)]="password"
+              placeholder="****"
+              required
+              #passwordInput="ngModel"
+              [class.border-red-500]="passwordInput.invalid && passwordInput.touched"
+              class="w-full px-3 py-2 rounded-md text-black bg-gray-100 border border-gray-300 focus:outline-none"
+            />
+            <div *ngIf="passwordInput.invalid && passwordInput.touched" class="text-sm text-red-200 mt-1">
+              <span *ngIf="passwordInput.errors?.['required']">Password is required</span>
+            </div>
+          </div>
+
+          <!-- Forgot -->
+          <a href="/forgot-password" class="text-sm text-gray-300 underline block text-right mb-4 cursor-pointer">Forgot Password?</a>
+
+          <!-- Submit Button -->
+          <button 
+            type="submit"
+            class="w-full py-2 border border-white rounded-md hover:bg-white hover:text-[#2f4254] transition text-white"
+            [disabled]="isSubmitting || loginForm.invalid"
+          >
+            <span *ngIf="!isSubmitting">Sign in</span>
+            <span *ngIf="isSubmitting" class="flex items-center justify-center gap-2">
+              <span class="animate-spin h-4 w-4 border-2 border-white border-t-transparent rounded-full"></span>
+              Signing in...
+            </span>
+          </button>
+
+          <!-- Error Message -->
+          <div *ngIf="errorMessage" class="text-red-200 mt-4 text-sm text-center">
+            {{ errorMessage }}
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <footer class="bg-[#1c2a38] text-white text-center py-3 text-sm">
+    <p>© KJC VOX. All rights reserved.</p>
+  </footer>
+</body>
+</html>

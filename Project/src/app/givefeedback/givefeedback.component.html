@@ -1,0 +1,138 @@
+<!-- feedback-form.component.html -->
+<div class="min-h-screen bg-gray-100 text-gray-800 font-sans">
+  <!-- Header -->
+  <header class="flex justify-between items-center p-3 bg-white border-b border-gray-300">
+    <div class="flex items-center gap-2">
+      <span class="text-2xl cursor-pointer">&#9776;</span>
+      <img 
+        src="https://www.kristujayantiexamlms.com/pluginfile.php/1/core_admin/logocompact/300x300/1752067815/logo2.png" 
+        alt="logo" 
+        class="h-10"
+      />
+      <h1 class="text-xl font-bold">
+        <span class="text-gray-800">KJC</span>
+        <span class="text-yellow-500"> VOX</span>
+      </h1>
+    </div>
+    <div class="w-12 h-12 rounded-full border-2 border-blue-600 p-0.5 bg-white flex justify-center items-center">
+      <img src="avth.png" alt="Avatar" class="w-full h-full rounded-full object-cover" />
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="flex justify-center p-5">
+    <div class="bg-white rounded-xl p-5 max-w-md w-full shadow-lg">
+      <h2 class="text-center text-xl font-semibold mb-5">
+        Feedback <span class="text-yellow-500">Form</span>
+      </h2>
+
+      <form (ngSubmit)="onSubmit()">
+        <!-- Q1 -->
+        <div class="mb-4">
+          <p class="mb-2 font-medium">1. Was the faculty punctual?</p>
+          <label class="mr-3">
+            <input type="radio" name="punctual" [(ngModel)]="feedback.punctual" value="yes" class="mr-1"> Yes
+          </label>
+          <label>
+            <input type="radio" name="punctual" [(ngModel)]="feedback.punctual" value="no" class="mr-1"> No
+          </label>
+        </div>
+
+        <!-- Q2 -->
+        <div class="mb-4">
+          <p class="mb-2 font-medium">2. How was the clarity of explanation?</p>
+          <div class="flex flex-row-reverse justify-end">
+            <input type="radio" id="clarity-5" name="clarity" [(ngModel)]="feedback.clarity" [value]="5" class="hidden">
+            <label for="clarity-5" class="text-2xl text-gray-300 cursor-pointer px-0.5 hover:text-yellow-400">&#9733;</label>
+            
+            <input type="radio" id="clarity-4" name="clarity" [(ngModel)]="feedback.clarity" [value]="4" class="hidden">
+            <label for="clarity-4" class="text-2xl text-gray-300 cursor-pointer px-0.5 hover:text-yellow-400">&#9733;</label>
+            
+            <input type="radio" id="clarity-3" name="clarity" [(ngModel)]="feedback.clarity" [value]="3" class="hidden">
+            <label for="clarity-3" class="text-2xl text-gray-300 cursor-pointer px-0.5 hover:text-yellow-400">&#9733;</label>
+            
+            <input type="radio" id="clarity-2" name="clarity" [(ngModel)]="feedback.clarity" [value]="2" class="hidden">
+            <label for="clarity-2" class="text-2xl text-gray-300 cursor-pointer px-0.5 hover:text-yellow-400">&#9733;</label>
+            
+            <input type="radio" id="clarity-1" name="clarity" [(ngModel)]="feedback.clarity" [value]="1" class="hidden">
+            <label for="clarity-1" class="text-2xl text-gray-300 cursor-pointer px-0.5 hover:text-yellow-400">&#9733;</label>
+          </div>
+        </div>
+
+        <!-- Q3 -->
+        <div class="mb-4">
+          <p class="mb-2 font-medium">3. Was the class engaging/interactive?</p>
+          <label class="mr-3">
+            <input type="radio" name="engaging" [(ngModel)]="feedback.engaging" value="yes" class="mr-1"> Yes
+          </label>
+          <label>
+            <input type="radio" name="engaging" [(ngModel)]="feedback.engaging" value="no" class="mr-1"> No
+          </label>
+        </div>
+
+        <!-- Q4 -->
+        <div class="mb-4">
+          <p class="mb-2 font-medium">4. How comfortable was the pace?</p>
+          <label class="mr-3">
+            <input type="radio" name="pace" [(ngModel)]="feedback.pace" value="slow" class="mr-1"> Slow
+          </label>
+          <label class="mr-3">
+            <input type="radio" name="pace" [(ngModel)]="feedback.pace" value="fast" class="mr-1"> Fast
+          </label>
+          <label>
+            <input type="radio" name="pace" [(ngModel)]="feedback.pace" value="normal" class="mr-1"> Normal
+          </label>
+        </div>
+
+        <!-- Q5 -->
+        <div class="mb-4">
+          <p class="mb-2 font-medium">5. Overall satisfaction</p>
+          <div class="flex flex-row-reverse justify-end">
+            <input type="radio" id="sat-5" name="satisfaction" [(ngModel)]="feedback.satisfaction" [value]="5" class="hidden">
+            <label for="sat-5" class="text-2xl text-gray-300 cursor-pointer px-0.5 hover:text-yellow-400">&#9733;</label>
+            
+            <input type="radio" id="sat-4" name="satisfaction" [(ngModel)]="feedback.satisfaction" [value]="4" class="hidden">
+            <label for="sat-4" class="text-2xl text-gray-300 cursor-pointer px-0.5 hover:text-yellow-400">&#9733;</label>
+            
+            <input type="radio" id="sat-3" name="satisfaction" [(ngModel)]="feedback.satisfaction" [value]="3" class="hidden">
+            <label for="sat-3" class="text-2xl text-gray-300 cursor-pointer px-0.5 hover:text-yellow-400">&#9733;</label>
+            
+            <input type="radio" id="sat-2" name="satisfaction" [(ngModel)]="feedback.satisfaction" [value]="2" class="hidden">
+            <label for="sat-2" class="text-2xl text-gray-300 cursor-pointer px-0.5 hover:text-yellow-400">&#9733;</label>
+            
+            <input type="radio" id="sat-1" name="satisfaction" [(ngModel)]="feedback.satisfaction" [value]="1" class="hidden">
+            <label for="sat-1" class="text-2xl text-gray-300 cursor-pointer px-0.5 hover:text-yellow-400">&#9733;</label>
+          </div>
+        </div>
+
+        <!-- Q6 -->
+        <div class="mb-4">
+          <p class="mb-2 font-medium">6. Additional comments</p>
+          <textarea 
+            [(ngModel)]="feedback.comments" 
+            name="comments" 
+            placeholder="Type here..." 
+            class="w-full h-20 p-2 border border-gray-300 rounded resize-none font-sans"
+          ></textarea>
+        </div>
+
+        <!-- Submit -->
+        <div class="text-center mt-5">
+      <button 
+  type="submit"
+  [disabled]="!feedback.punctual || !feedback.engaging || !feedback.pace || !feedback.clarity || !feedback.satisfaction"
+  class="bg-gray-800 text-white border-none py-2 px-8 text-base rounded cursor-pointer hover:bg-gray-900 disabled:opacity-50 disabled:cursor-not-allowed"
+>
+  SUBMIT
+</button>
+
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="text-center p-4 bg-gray-800 text-white mt-8 text-sm">
+    © KJC VOX. All rights reserved.
+  </footer>
+</div>

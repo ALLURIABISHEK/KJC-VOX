@@ -1,0 +1,64 @@
+<!-- Header -->
+<header class="flex justify-between items-center px-4 py-3 border-b-2 border-gray-200">
+  <div class="flex items-center gap-3">
+    <span class="text-2xl">&#9776;</span>
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXuH55vOVHO2LCF7rxvEYAfpEZqj3qvRuKnw&s" alt="logo" class="h-12 w-auto" />
+    <h1 class="text-lg md:text-xl font-bold">
+      <span>KJC</span> <span class="text-yellow-400">VOX</span>
+    </h1>
+  </div>
+  <div class="w-11 h-11 rounded-full overflow-hidden border-2 border-blue-600">
+    <img src="assets\AdminIcon.jpg" alt="avatar" class="w-full h-full object-cover" />
+  </div>
+</header>
+
+<!-- Main Content -->
+<div class="px-4 py-6 max-w-screen-xl mx-auto">
+  <h2 class="text-2xl md:text-3xl font-bold text-center mb-6">
+    Manage <span class="text-yellow-400">Department</span>
+  </h2>
+
+  <!-- Department Table Section -->
+  <div class="bg-white border-2 border-[#0d3c61] rounded-xl p-5 overflow-x-auto">
+    <button class="bg-gray-800 text-white px-5 py-2 rounded-md text-sm float-right mb-4 flex items-center gap-2"
+            (click)="addDepartment()">
+      Add Department <i class="fas fa-plus text-white text-sm"></i>
+    </button>
+
+    <h3 class="text-lg font-semibold mb-3 clear-both">Department List</h3>
+
+    <table class="w-full text-left border-collapse">
+      <thead>
+        <tr class="border-b border-gray-200">
+          <th class="p-3 text-gray-600 font-semibold">Name</th>
+          <th class="p-3 text-gray-600 font-semibold">Classes Assigned</th>
+          <th class="p-3 text-gray-600 font-semibold">Subjects Assigned</th>
+          <th class="p-3 text-gray-600 font-semibold">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let dept of departments" class="border-b border-gray-100 hover:bg-gray-50">
+          <td class="p-3">{{ dept.departmentName }} ({{ dept.departmentType }})</td>
+          <td class="p-3">{{ dept.className }}</td>
+          <td class="p-3">{{ formatSubjects(dept.subjects) }}</td>
+          <td class="p-3">
+            <div class="flex items-center gap-4 text-gray-600">
+              <i class="fas fa-pen cursor-pointer hover:text-black transform hover:scale-110 transition"
+                 (click)="editDepartment(dept.className)"></i>
+              <i class="fas fa-trash cursor-pointer hover:text-black transform hover:scale-110 transition"
+                 (click)="deleteDepartment(dept.className)"></i>
+            </div>
+          </td>
+  
+
+
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="bg-gray-800 text-white text-center py-4 mt-10 text-sm font-medium rounded-t-xl">
+  © KJC VOX. All rights reserved.
+</footer>

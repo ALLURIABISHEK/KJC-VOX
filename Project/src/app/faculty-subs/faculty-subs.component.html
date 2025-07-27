@@ -1,0 +1,96 @@
+<div class="bg-gray-100 min-h-screen flex flex-col">
+  <!-- Navbar -->
+  <header class="flex items-center justify-between px-5 py-3 bg-white border-b-2 border-gray-300">
+    <div class="flex items-center">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXuH55vOVHO2LCF7rxvEYAfpEZqj3qvRuKnw&s" alt="KJC Logo" class="h-10 mr-2" />
+      <span class="text-2xl font-semibold text-slate-800">KJC <strong class="text-yellow-500">VOX</strong></span>
+    </div>
+    <div class="flex items-center space-x-4">
+      <span class="text-sm text-gray-600">Welcome, {{facultyName}}</span>
+   <!---   <img src="avatar.png" alt="Profile" class="h-10 w-10 rounded-full" /> -->
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="flex-1 m-5 p-6 border-4 border-[#1e3a5f] bg-white rounded-md">
+    <h2 class="text-center text-3xl font-bold text-slate-800 mb-6">
+      My <span class="text-yellow-500">Subjects</span>
+    </h2>
+
+    <!-- Filters -->
+    <div class="flex flex-wrap justify-between gap-4 px-2 text-lg font-semibold mb-6">
+      <label class="flex items-center text-[#1e3a5f]">
+        Semester:
+        <select [(ngModel)]="semester" (change)="fetchAssignedSubjects()" class="ml-2 p-2 border-2 border-slate-400 rounded-md">
+          <option [value]="1">I</option>
+          <option [value]="2">II</option>
+          <option [value]="3">III</option>
+          <option [value]="4">IV</option>
+        </select>
+      </label>
+
+      <label class="flex items-center text-[#1e3a5f]">
+        Class:
+        <select [(ngModel)]="className" (change)="fetchAssignedSubjects()" class="ml-2 p-2 border-2 border-slate-400 rounded-md">
+          <option value="1MCA-A">1MCA-A</option>
+          <option value="1MCA-B">1MCA-B</option>
+          <option value="1MCA-C">1MCA-C</option>
+          <option value="1MCA-D">1MCA-D</option>
+          <option value="2MCA-A">2MCA-A</option>
+          <option value="2MCA-B">2MCA-B</option>
+          <option value="2MCA-C">2MCA-C</option>
+          <option value="2MCA-D">2MCA-D</option>
+          <option value="1MSC-A">1MSC-A</option>
+          <option value="1MSC-B">1MSC-B</option>
+          <option value="1MSC-C">1MSC-C</option>
+          <option value="1MSC-D">1MSC-D</option>
+          <option value="2MSC-A">2MSC-A</option>
+          <option value="2MSC-B">2MSC-B</option>
+          <option value="3MSC-C">3MSC-C</option>
+          <option value="4MSC-D">4MSC-D</option>
+        </select>
+      </label>
+    </div>
+
+    <!-- Loading Indicator -->
+    <div *ngIf="isLoading" class="text-center py-8">
+      <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+      <p class="mt-2 text-gray-600">Loading subjects...</p>
+    </div>
+
+    <!-- Error Message -->
+    <div *ngIf="errorMessage && !isLoading" class="text-center py-8">
+      <p class="text-red-600 font-medium">{{ errorMessage }}</p>
+    </div>
+
+    <!-- Assigned Subjects -->
+    <div *ngIf="assignedSubjects.length > 0 && !isLoading && !errorMessage">
+      <div *ngFor="let subject of assignedSubjects" class="max-w-[90%] mx-auto bg-white border border-blue-300 shadow-md rounded-lg p-4 mb-4 flex justify-between items-center">
+        <div>
+          <p class="text-xl font-bold text-slate-800">{{ subject.name }}</p>
+          <p class="text-sm text-gray-700">Course Code: {{ subject.courseCode }}</p>
+          <p class="text-sm text-gray-700">Assigned Faculty: {{ subject.assignedFaculty }}</p>
+        </div>
+        <button
+          (click)="viewFeedback(subject)"
+          class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition"
+        >
+          View Feedback
+        </button>
+      </div>
+    </div>
+
+    <!-- No Subjects Message (when not loading and no error) -->
+    <div *ngIf="assignedSubjects.length === 0 && !isLoading && !errorMessage" class="text-center py-8">
+      <p class="text-gray-600 font-medium">
+        No subjects assigned for the selected class and semester.
+      </p>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-[#1e3a5f] text-white text-center py-2 text-sm">
+    <p>© KJC VOX. All rights reserved.</p>
+  </footer>
+</div>

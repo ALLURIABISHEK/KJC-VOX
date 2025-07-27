@@ -1,0 +1,94 @@
+<!-- Navbar -->
+<header class="flex flex-wrap justify-between items-center px-8 py-3 bg-white border-b border-gray-300">
+    <div class="flex items-center gap-3">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXuH55vOVHO2LCF7rxvEYAfpEZqj3qvRuKnw&s" alt="KJC Logo" class="h-[50px]" />
+      <h2 class="text-2xl font-bold">
+        <span class="text-[#2e3d53]">KJC</span>
+        <span class="text-[#f7b928]">VOX</span>
+      </h2>
+    </div>
+    <img src="assets\AdminIcon.jpg" alt="User Avatar" class="h-[45px] w-[45px] rounded-full object-cover border-2 border-[#1d2d50]" />
+  </header>
+  
+  <!-- Blue section & white box reordered for mobile -->
+  <section class="bg-[#2d4566] text-white px-6 sm:px-10 py-10 rounded-b-2xl flex flex-col-reverse sm:flex-row gap-8 sm:gap-10 justify-between">
+    <!-- Blue Greeting Box -->
+    <div class="flex flex-col sm:flex-row items-center gap-6 flex-1">
+      <img src="assets/Handsign.png" alt="Character Illustration" class="h-[170px] sm:h-[170px]" />
+      <div class="text-center sm:text-left">
+        <h2 *ngIf="userName; else fallback" class="text-3xl font-semibold">Hello, {{ userName }}</h2>
+        <ng-template #fallback><h2 class="text-3xl font-semibold">Welcome!</h2></ng-template>
+        <p class="my-4 text-base">This is your personalized space on Vox to share feedback, track your classroom experience, and contribute to academic improvement.</p>
+        <button class="px-5 py-2 border-2 border-white text-white rounded-lg font-semibold hover:bg-white hover:text-[#2d4566] transition">Let your voice be heard anonymously and meaningfully</button>
+      </div>
+    </div>
+  
+    <!-- White Box (should appear first on mobile) -->
+    <div class="bg-[#cfdce6] text-[#1d2d50] p-6 rounded-2xl max-w-lg shadow-md flex-1">
+      <h4 class="text-lg font-bold text-center mb-5">Ready to share your thoughts?</h4>
+      <div class="flex justify-around flex-wrap gap-5">
+        <div class="text-center flex-1">
+          <img src="assets/RightMsg.png" alt="Feedback Icon" class="w-20 mx-auto mb-2" />
+          <p>Start your<br />feedback<br />for today</p>
+        </div>
+        <div class="text-center flex-1">
+          <img src="assets/RightEmoji.png" alt="Emotion Icon" class="w-20 mx-auto mb-2" />
+          <p>Let your<br />emotions<br />be connected</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Feature Cards & Image -->
+  <section class="flex flex-wrap justify-center sm:justify-between gap-8 p-10">
+    <div class="flex flex-col sm:flex-row flex-wrap gap-6 items-center sm:items-start justify-center sm:justify-start max-w-full sm:max-w-[55%]">
+      <div class="bg-white border-4 border-[#cdd6e2] rounded-2xl w-[180px] p-6 text-center shadow-md cursor-pointer" (click)="goToMySubjects()">
+        <img src="assets/AllStudents.png" alt="Subjects" class="h-[100px] mx-auto mb-3" />
+        <h4 class="text-[#1d2d50] text-base font-semibold">All Subjects</h4>
+      </div>
+      <div class="bg-white border-4 border-[#cdd6e2] rounded-2xl w-[180px] p-6 text-center shadow-md">
+        <img src="assets/My Feedback.png" alt="Feedback" class="h-[100px] mx-auto mb-3" />
+        <h4 class="text-[#1d2d50] text-base font-semibold">My Feedback</h4>
+      </div>
+      <div class="bg-white border-4 border-[#cdd6e2] rounded-2xl w-[180px] p-6 text-center shadow-md">
+        <img src="assets/Reports.png" alt="Issue" class="h-[100px] mx-auto mb-3" />
+        <h4 class="text-[#1d2d50] text-base font-semibold">Report Issue</h4>
+      </div>
+    </div>
+  
+    <div class="w-full sm:w-[40%]">
+      <img src="assets/Width-KJC.png" alt="Campus" class="w-full rounded-2xl shadow-md" />
+    </div>
+  </section>
+  
+  <!-- Announcements Section -->
+  <section class="flex flex-wrap gap-6 justify-between px-8 py-6">
+    <div class="flex flex-col sm:flex-row items-center sm:items-start gap-5 flex-1 bg-white border-2 border-[#cdd6e2] p-5 rounded-xl">
+      <img src="assets/Mic-Dash.png" alt="Announcement Icon" class="h-[200px] sm:h-[200px]" />
+      <div>
+        <h3 class="text-lg font-semibold mb-3">Announcements</h3>
+        <ul class="list-none text-sm leading-7">
+          <li><span class="mr-1">🔔</span> Haven’t submitted mood logs this week? <span class="text-red-600 font-semibold">Don’t forget to check in!</span></li>
+          <li><span class="mr-1">🔔</span> Semester feedback deadline is July 30, 2025. <span class="text-blue-600 font-semibold">Submit before it closes!</span></li>
+          <li><span class="mr-1">🔔</span> Your feedback is 100% anonymous and valuable. <span class="font-semibold">Let your voice be heard.</span></li>
+        </ul>
+      </div>
+    </div>
+  
+<div class="flex-1 bg-[#354b63] text-white p-5 rounded-xl border-2 border-[#cdd6e2] text-sm">
+  <ul class="list-none">
+    <li *ngFor="let notice of notices">
+      <span class="mr-1">➤</span>
+      <strong>{{ notice.title }}</strong>: {{ notice.description }} 
+      <span class="ml-2 text-xs">[{{ notice.date }}]</span>
+    </li>
+  </ul>
+</div>
+
+
+  </section>
+  
+  <!-- Footer -->
+  <footer class="bg-[#1d2d50] text-white text-center text-sm py-4 mt-5">
+    © KJC VOX. All rights reserved.
+  </footer>

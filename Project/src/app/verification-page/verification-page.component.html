@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Verify Department - KJC VOX</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#2c3e50',
+            accent: '#fbbc04',
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-[#f2f7fb] font-['Segoe_UI',_Tahoma,_Geneva,_Verdana,_sans-serif] m-0">
+  <!-- Header -->
+  <header class="flex justify-between items-center px-[30px] py-[15px] bg-white border-b-2 border-gray-200 shadow-sm sticky top-0 z-10">
+    <div class="logo flex items-center text-2xl font-bold text-primary">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXuH55vOVHO2LCF7rxvEYAfpEZqj3qvRuKnw&s" alt="KJC Logo" class="h-10 mr-2">
+      <span>KJC <span class="text-accent">VOX</span></span>
+    </div>
+
+    <div class="hamburger md:hidden text-2xl cursor-pointer" onclick="document.getElementById('navMenu').classList.toggle('hidden')">
+      ☰
+    </div>
+
+    <nav id="navMenu" class="hidden md:block">
+      <a href="#" class="px-4 py-3 block text-primary font-medium hover:text-accent transition">Home</a>
+    </nav>
+  </header>
+
+  <!-- Main Container -->
+  <main class="max-w-[1200px] mx-auto my-5 bg-white border-4 border-[#2d3e50] p-5">
+    <div class="verify-box max-w-[1000px] mx-auto text-center">
+      <h2 class="text-2xl mb-2.5">Verify your <span class="text-accent">Department</span></h2>
+      <p class="text-[#4a4a4a] text-base mb-5">
+        Based on your registered email or student id, we've identified your department and semester.<br>
+        Please review and confirm the information before proceeding
+      </p>
+
+      <div class="content flex flex-wrap justify-center items-start mt-5">
+        <!-- Left Box -->
+        <div class="left-box w-[300px] p-5 bg-[#f9fafc] rounded-xl shadow-md mb-5">
+          <img src="assets\verifi.jpg" alt="Graduation Cap" class="w-full rounded-lg">
+          <div class="student-name font-semibold text-xl mt-2.5">{{ studentData?.name || 'Loading...' }}</div>
+          <div class="student-id text-base text-primary">{{ studentData?.rollnumber || 'Loading...' }}</div>
+        </div>
+
+        <!-- Right Box -->
+        <div class="right-box flex-grow text-left pl-10 min-w-[280px]">
+          <div class="field mb-4 flex items-center flex-wrap">
+            <label class="font-bold mr-2.5 w-[120px] text-right">Email :</label>
+            <input type="text" [value]="studentData?.email || ''" readonly 
+                   class="px-2 py-2 flex-grow min-w-[180px] max-w-[400px] rounded border border-gray-400 bg-[#f8f8f8]">
+          </div>
+          <div class="field mb-4 flex items-center flex-wrap">
+            <label class="font-bold mr-2.5 w-[120px] text-right">Department :</label>
+            <input type="text" [value]="studentData?.department || ''" readonly 
+                   class="px-2 py-2 flex-grow min-w-[180px] max-w-[400px] rounded border border-gray-400 bg-[#f8f8f8]">
+          </div>
+          <div class="field mb-4 flex items-center flex-wrap">
+            <label class="font-bold mr-2.5 w-[120px] text-right">Course :</label>
+            <input type="text" [value]="studentData?.course || ''" readonly 
+                   class="px-2 py-2 flex-grow min-w-[180px] max-w-[400px] rounded border border-gray-400 bg-[#f8f8f8]">
+          </div>
+          <div class="field mb-4 flex items-center flex-wrap">
+            <label class="font-bold mr-2.5 w-[120px] text-right">Semester :</label>
+            <input type="text" [value]="studentData?.semester || ''" readonly 
+                   class="px-2 py-2 flex-grow min-w-[180px] max-w-[400px] rounded border border-gray-400 bg-[#f8f8f8]">
+          </div>
+
+   <div class="confirm-section mt-8 text-center">
+  <div class="confirm text-green-600 text-sm mb-5 flex justify-center items-center">
+    <input type="checkbox" id="confirmCheckbox" [(ngModel)]="isConfirmed"
+           class="mr-2 w-4 h-4 accent-green-600">
+    <label for="confirmCheckbox">Is this information correct?</label>
+  </div>
+
+  <button
+    class="bg-primary text-white px-8 py-3 rounded cursor-pointer border-none text-base mr-4 
+           disabled:bg-gray-500 disabled:cursor-not-allowed 
+           hover:bg-[#243746] active:bg-primary focus:outline-none"
+    id="proceedButton"
+    [disabled]="!isConfirmed"
+    (click)="handleVerification()">
+    Yes, Proceed
+  </button>
+
+  <span class="report text-red-500 cursor-pointer text-sm">Report an Issue</span>
+</div>
+
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer-container bg-primary py-4 mt-8">
+    <div class="footer text-center text-sm text-white">
+      © KJC VOX. All rights reserved.
+    </div>
+  </footer>

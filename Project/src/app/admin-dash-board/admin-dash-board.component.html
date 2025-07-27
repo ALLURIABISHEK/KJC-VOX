@@ -1,0 +1,105 @@
+<!-- Navbar -->
+<header class="flex justify-between items-center px-8 py-3 bg-white shadow-md sticky top-0 z-50">
+  <div class="flex items-center gap-3">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXuH55vOVHO2LCF7rxvEYAfpEZqj3qvRuKnw&s" alt="KJC Logo" class="w-12 h-12">
+    <h1 class="text-2xl font-bold text-yellow-600">KJC <span class="text-[#00438c]">VOX</span></h1>
+  </div>
+
+  <!-- Profile Dropdown -->
+  <div class="relative" (click)="toggleDropdown()">
+    <img src="assets\AdminIcon.jpg" alt="User Avatar" class="w-10 h-10 rounded-full border-2 border-[#00438c] cursor-pointer">
+
+    <!-- Dropdown Menu -->
+    <div *ngIf="dropdownOpen" class="absolute right-0 mt-2 w-32 bg-white rounded-md shadow-lg border border-gray-200 z-50">
+      <button (click)="logout()" class="block w-full px-4 py-2 text-sm text-left hover:bg-gray-100 text-red-600 font-medium">
+        Logout
+      </button>
+    </div>
+  </div>
+</header>
+
+
+<!-- Greeting Banner -->
+<section class="relative flex flex-col md:flex-row items-center md:items-start bg-[#2e4663] text-white px-4 md:px-20 py-8 mt-5 mx-5 rounded-2xl gap-6 overflow-hidden">
+  <img src="assets\adminpara.png" alt="Checklist" class="w-28 md:absolute md:left-14 md:top-1/2 transform md:-translate-y-1/2">
+  <div class="text-center md:text-left md:ml-32">
+    <h2 class="text-3xl md:text-4xl font-bold">
+      <span class="text-yellow-400">Hello,</span>
+      <span class="text-white font-bold">{{ adminName }}</span>
+    </h2>
+    <p class="text-base mt-2 font-medium">Manage everything from one place — feedback, users, departments, and reports.</p>
+  </div>
+</section>
+
+<!-- Cards + Campus Image -->
+<section class="flex flex-col lg:flex-row justify-between gap-6 mt-8 px-5">
+  <!-- Shortcut Cards -->
+  <div class="flex flex-wrap gap-20 justify-center flex-1">
+    <!-- Add Faculty Card -->
+    <a href="/add-faculty" class="bg-gradient-to-b from-[#003366] to-[#66ccff] p-[2px] rounded-xl shadow-md hover:-translate-y-1 transition-all w-44">
+      <div class="bg-white rounded-xl p-4 text-center shadow-md">
+        <img src="assets\Adminfac.png" class="w-20 h-20 mx-auto" />
+        <p class="mt-2 font-semibold text-base">Add Faculty</p>
+      </div>
+    </a>
+    
+    <!-- Department Card -->
+    <a href="/manage-department" class="bg-gradient-to-b from-[#003366] to-[#66ccff] p-[2px] rounded-xl shadow-md hover:-translate-y-1 transition-all w-44">
+      <div class="bg-white rounded-xl p-4 text-center shadow-md">
+        <img src="assets\admindept.png" class="w-20 h-20 mx-auto" />
+        <p class="mt-2 font-semibold text-base">Department</p>
+      </div>
+    </a>
+    
+    <!-- Add Notices Card -->
+    <a href="/notice" class="bg-gradient-to-b from-[#003366] to-[#66ccff] p-[2px] rounded-xl shadow-md hover:-translate-y-1 transition-all w-44">
+      <div class="bg-white rounded-xl p-4 text-center shadow-md">
+        <img src="assets\adminannounce.png" class="w-20 h-20 mx-auto" />
+        <p class="mt-2 font-semibold text-base">Add Notices</p>
+      </div>
+    </a>
+    
+    <!-- Add Subjects Card -->
+    <a href="/assign-subjects" class="bg-gradient-to-b from-[#003366] to-[#66ccff] p-[2px] rounded-xl shadow-md hover:-translate-y-1 transition-all w-44">
+      <div class="bg-white rounded-xl p-4 text-center shadow-md">
+        <img src="assets\adminsubjects.png" class="w-20 h-20 mx-auto" />
+        <p class="mt-2 font-semibold text-base">Add Subjects</p>
+      </div>
+    </a>
+    
+    <!-- View Issues Card -->
+   <div class="bg-gradient-to-b from-[#003366] to-[#66ccff] p-[2px] rounded-xl shadow-md hover:-translate-y-1 transition-all w-44">
+  <div class="bg-white rounded-xl p-4 text-center shadow-md">
+    <img src="assets\Reports.png" class="w-20 h-20 mx-auto" />
+    <p class="mt-2 font-semibold text-base">View Issues</p>
+  </div>
+</div>
+  </div>
+
+  <!-- Campus Image -->
+  <div class="flex justify-center items-center flex-shrink-0">
+    <img src="assets\adminkjc.jpg" alt="Campus" class="rounded-xl shadow-md w-full max-w-sm">
+  </div>
+</section>
+
+<!-- Charts -->
+<section class="flex flex-wrap justify-center gap-10 px-5 mt-10 overflow-x-auto">
+  <div class="bg-white border border-gray-300 rounded-[40px] p-4 w-[320px] h-[300px] shadow-md">
+    <img src="assets\AdminPIE.png" alt="Chart" class="h-[90%] w-full object-contain">
+  </div>
+  <div class="bg-white border border-gray-300 rounded-[40px] p-4 w-[320px] h-[300px] shadow-md">
+    <img src="assets\AdminPIE.png" alt="Chart" class="h-[90%] w-full object-contain">
+  </div>
+  <div class="bg-white border border-gray-300 rounded-[40px] p-4 w-[320px] h-[300px] shadow-md">
+    <img src="assets\AdminPIE.png" alt="Chart" class="h-[90%] w-full object-contain">
+  </div>
+  <div class="bg-white border border-gray-300 rounded-[40px] p-4 w-[320px] h-[300px] shadow-md">
+    <img src="assets\AdminPIE.png" alt="Chart" class="h-[90%] w-full object-contain">
+  </div>
+</section>
+
+
+<!-- Footer -->
+<footer class="bg-[#2e4663] text-white text-center py-4 mt-10 rounded-t-2xl font-medium">
+  <p>© KJC VOX. All rights reserved.</p>
+</footer>

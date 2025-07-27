@@ -1,0 +1,193 @@
+<header class="bg-white p-4 flex justify-between items-center shadow-md">
+    <!-- logo and avatar -->
+    <div class="flex items-center gap-3">
+      <img class="w-10 h-10 rounded-full" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXuH55vOVHO2LCF7rxvEYAfpEZqj3qvRuKnw&s" alt="Logo" />
+      <div class="text-2xl font-bold flex items-center gap-1">
+        <span class="text-[#1f2f44]">KJC</span><span class="text-yellow-400">VOX</span>
+      </div>
+    </div>
+    <div class="w-10 h-10 rounded-full overflow-hidden">
+      <img class="w-full h-full object-cover" src="assets\AdminIcon.jpg" alt="Avatar" />
+    </div>
+  </header>
+  
+  <!-- stat cards -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 p-4">
+    <div class="bg-white p-4 rounded-lg shadow border text-center">
+      <i class="fas fa-building text-2xl mb-2"></i>
+      <h2 class="text-xl">{{totalFacultyCount}}<br/>Total Faculty</h2>
+    </div>
+    <div class="bg-white p-4 rounded-lg shadow border text-center">
+      <i class="fas fa-building text-2xl mb-2"></i>
+      <h2 class="text-xl">{{totalDepartments}}<br/>Departments</h2>
+    </div>
+    <div class="bg-white p-4 rounded-lg shadow border text-center">
+      <i class="fas fa-user text-2xl mb-2"></i>
+      <h2 class="text-xl">{{newHires}}<br/>New Hires</h2>
+    </div>
+    <div class="bg-white p-4 rounded-lg shadow border text-center">
+      <i class="fas fa-user-times text-2xl mb-2"></i>
+      <h2 class="text-xl">{{recentRemovals}}<br/>Recent Removals</h2>
+    </div>
+  </div>
+  
+  <!-- Add New Faculty section -->
+  <div class="p-4">
+    <div class="text-lg font-semibold mb-3 flex items-center gap-2"><i class="fas fa-user-plus"></i> Add New Faculty</div>
+    <div class="bg-white p-4 rounded-lg shadow border mb-6">
+      <form (ngSubmit)="onSubmit()" #facultyForm="ngForm">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+          <!-- Fields -->
+          <ng-container *ngFor="let field of ['facultyId','fullName','email','joiningDate','departmentType']">
+          </ng-container>
+          <div>
+            <label class="flex items-center gap-2 font-medium text-sm"><i class="fas fa-id-badge"></i> Faculty ID</label>
+            <input type="text" name="facultyId" [(ngModel)]="faculty.facultyId" [readonly]="isEditing" required class="w-full p-2 border rounded" />
+          </div>
+          <div>
+            <label class="flex items-center gap-2 font-medium text-sm"><i class="fas fa-user"></i> Full Name</label>
+            <input type="text" name="fullName" [(ngModel)]="faculty.fullName" required class="w-full p-2 border rounded" />
+          </div>
+          <div>
+            <label class="flex items-center gap-2 font-medium text-sm"><i class="fas fa-envelope"></i> Email Address</label>
+            <input type="email" name="email" [(ngModel)]="faculty.email" required class="w-full p-2 border rounded" />
+          </div>
+          <div>
+            <label class="flex items-center gap-2 font-medium text-sm"><i class="fas fa-calendar"></i> Joining Date</label>
+            <input type="date" name="joiningDate" [(ngModel)]="faculty.joiningDate" required class="w-full p-2 border rounded" />
+          </div>
+          <div>
+            <label class="flex items-center gap-2 font-medium text-sm"><i class="fas fa-graduation-cap"></i> Department Type</label>
+            <select name="departmentType" [(ngModel)]="faculty.departmentType" (change)="updateDepartmentDisplay()" required class="w-full p-2 border rounded bg-white">
+              <option value="PG">PG</option>
+              <option value="UG">UG</option>
+            </select>
+          </div>
+          <div>
+            <label class="flex items-center gap-2 font-medium text-sm"><i class="fas fa-building"></i> Department</label>
+            <input type="text" [value]="'Computer Science [' + faculty.departmentType + ']'" readonly class="w-full p-2 border rounded bg-gray-100" />
+          </div>
+        </div>
+        <div class="flex justify-end gap-2 mt-4">
+          <button type="submit" class="btn-blue" [disabled]="loading || !facultyForm.valid">
+            <span *ngIf="!loading">{{isEditing ? 'Update Faculty' : 'Add Faculty'}}</span>
+            <span *ngIf="loading"><i class="fas fa-spinner fa-spin mr-1"></i> {{isEditing ? 'Updating...' : 'Adding...'}}</span>
+          </button>
+          <button type="button" class="btn-gray" (click)="resetForm()">{{isEditing ? 'Cancel Edit' : 'Reset'}}</button>
+        </div>
+      </form>
+    </div>
+  
+    <!-- Quick actions -->
+    <div class="text-lg font-semibold mb-3 flex items-center gap-2"><i class="fas fa-bolt"></i> Quick Actions</div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+      <button class="action-btn" [class.active]="showFacultyList" (click)="toggleViewFaculty()"><i class="fas fa-server"></i> View Faculty</button>
+      <button class="action-btn" [class.active]="manageMode" (click)="toggleManageMode()"><i class="fas fa-tasks"></i> Manage Mode</button>
+      <button class="action-btn" [class.active]="showStats" (click)="toggleViewStats()"><i class="fas fa-chart-pie"></i> View Stats</button>
+    </div>
+  
+    <!-- Search Faculty -->
+    <div class="text-lg font-semibold mb-3 flex items-center gap-2"><i class="fas fa-search"></i> Search Faculty</div>
+    <div class="bg-white p-4 rounded-lg shadow border mb-6">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        <div>
+          <label class="font-medium text-sm"><i class="fas fa-id-badge"></i> Faculty ID</label>
+          <input type="text" [(ngModel)]="searchParams.facultyId" (input)="searchFaculty()" class="w-full p-2 border rounded" />
+        </div>
+        <div>
+          <label class="font-medium text-sm"><i class="fas fa-user"></i> Full Name</label>
+          <input type="text" [(ngModel)]="searchParams.fullName" (input)="searchFaculty()" class="w-full p-2 border rounded" />
+        </div>
+        <div>
+          <label class="font-medium text-sm"><i class="fas fa-envelope"></i> Email</label>
+          <input type="email" [(ngModel)]="searchParams.email" (input)="searchFaculty()" class="w-full p-2 border rounded" />
+        </div>
+        <div>
+          <label class="font-medium text-sm"><i class="fas fa-building"></i> Department</label>
+          <select [(ngModel)]="searchParams.departmentType" (change)="searchFaculty()" class="w-full p-2 border rounded bg-white">
+            <option value="">All Departments</option>
+            <option value="PG">PG</option>
+            <option value="UG">UG</option>
+          </select>
+        </div>
+        <div>
+          <label class="font-medium text-sm"><i class="fas fa-calendar"></i> From Date</label>
+          <input type="date" [(ngModel)]="searchParams.fromDate" (change)="searchFaculty()" class="w-full p-2 border rounded" />
+        </div>
+        <div>
+          <label class="font-medium text-sm"><i class="fas fa-calendar"></i> To Date</label>
+          <input type="date" [(ngModel)]="searchParams.toDate" (change)="searchFaculty()" class="w-full p-2 border rounded" />
+        </div>
+      </div>
+      <div class="flex justify-end gap-2 mt-4">
+        <button class="btn-blue" (click)="searchFaculty()">Search Faculty</button>
+        <button class="btn-gray" (click)="clearSearch()">Clear Search</button>
+      </div>
+    </div>
+  
+    <!-- Faculty List -->
+    <div *ngIf="showFacultyList" class="bg-white p-4 rounded-lg shadow border mb-6">
+      <div class="flex justify-between items-center mb-4">
+        <h3>Faculty List ({{filteredFaculty.length}} total)</h3>
+        <div class="flex items-center gap-2">
+          <label class="font-medium">Sort By:
+            <select [(ngModel)]="sortBy" (change)="sortFaculty()" class="p-2 border rounded ml-2">
+              <option value="fullName">Name (A-Z)</option>
+              <option value="facultyId">Faculty ID</option>
+              <option value="joiningDate">Joining Date</option>
+              <option value="departmentType">Department Type</option>
+            </select>
+          </label>
+        </div>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="min-w-full divide-y divide-gray-200">
+          <thead class="bg-gray-100">
+            <tr>
+              <th>Faculty ID</th><th>Full Name</th><th>Email</th><th>Department</th><th>Joining Date</th><th *ngIf="manageMode">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let member of paginatedFaculty" class="hover:bg-gray-50">
+              <td>{{member.facultyId}}</td>
+              <td>{{member.fullName}}</td>
+              <td>{{member.email}}</td>
+              <td>{{member.department}}</td>
+              <td>{{member.joiningDate | date:'dd/MM/yyyy'}}</td>
+              <td *ngIf="manageMode" class="flex gap-2">
+                <button class="btn-edit" (click)="editFaculty(member)"><i class="fas fa-edit"></i> Edit</button>
+                <button class="btn-delete" (click)="deleteFaculty(member)"><i class="fas fa-trash"></i> Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="flex justify-between items-center mt-4">
+        <button (click)="previousPage()" [disabled]="currentPage===1" class="btn-blue">Previous</button>
+        <span>Page {{currentPage}} of {{totalPages}}</span>
+        <button (click)="nextPage()" [disabled]="currentPage===totalPages" class="btn-blue">Next</button>
+      </div>
+    </div>
+  
+    <!-- Department Analytics -->
+    <div *ngIf="showStats" class="bg-white p-4 rounded-lg shadow border mb-6">
+      <h3 class="text-lg font-semibold flex items-center gap-2"><i class="fas fa-chart-line"></i> Department Analytics</h3>
+      <div class="overflow-x-auto mt-4">
+        <table class="min-w-full divide-y divide-gray-200">
+          <thead class="bg-blue-600 text-white">
+            <tr><th>Department</th><th>Faculty Count</th><th>Percentage</th></tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let stat of departmentStats" class="even:bg-gray-50">
+              <td>{{stat.departmentName}}</td><td>{{stat.count}}</td><td>{{stat.percentage}}%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  
+    <!-- Footer -->
+    <footer class="bg-[#1f2f44] text-white text-center py-4 mt-8">
+      <p>&copy; KJC VOX. All rights reserved.</p>
+    </footer>
+  </div>
