@@ -12,7 +12,7 @@ import java.util.List;
 
 public class GeminiService {
 
-    private static final String GEMINI_API_KEY = "AIzaSyAWOvaoeoi1k5MmEmePodcNIjJpqeSKicw";
+    private static final String GEMINI_API_KEY = "your code here";
 
     // Updated to use a current model from your list
     private static final String GEMINI_API_URL =
