@@ -1,45 +1,139 @@
-<!-- tailwind-enabled version -->
-<header class="flex justify-between items-center bg-white px-5 py-4 border-b border-gray-300">
-  <div class="flex items-center gap-3">
-    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXuH55vOVHO2LCF7rxvEYAfpEZqj3qvRuKnw&s" alt="KJC Logo" class="h-10 sm:h-8" />
-    <h1 class="text-2xl text-gray-800 font-semibold">KJC <span class="text-yellow-500">VOX</span></h1>
+<!-- Clean Professional Template Matching Feedback Form Theme -->
+<header class="flex justify-between items-center bg-[#2c3e50] px-6 py-4 shadow-md">
+  <div class="flex items-center gap-3 animate-fade-in">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXuH55vOVHO2LCF7rxvEYAfpEZqj3qvRuKnw&s" 
+         alt="KJC Logo" 
+         class="h-10 sm:h-8 transition-transform duration-300 hover:scale-105" />
+    <h1 class="text-2xl sm:text-xl text-white font-semibold">
+      KJC <span class="text-[#f39c12]">VOX</span>
+    </h1>
   </div>
   <div class="profile-icon">
-    <img src="assets\AdminIcon.jpg" alt="Profile" class="h-10 sm:h-8 rounded-full border-2 border-yellow-500" />
+    <img src="assets/AdminIcon.jpg" 
+         alt="Profile" 
+         class="h-10 sm:h-8 rounded-full border-2 border-[#f39c12] transition-all duration-300 cursor-pointer hover:border-[#e67e22]" />
   </div>
 </header>
 
-<main class="p-5 flex-grow bg-gray-100 min-h-screen font-['Roboto']">
-  <div class="bg-white p-5 rounded-xl shadow-md">
-    <h2 class="text-2xl font-semibold mb-2">My <span class="text-yellow-500">Subjects</span></h2>
-    <p class="font-bold mb-5">Course: Master's of Computer Application [MCA]</p>
-
-    <div *ngIf="subjects.length === 0">
-      <p>No subjects found.</p>
+<main class="p-6 flex-grow bg-[#f5f7fa] min-h-screen font-['Segoe_UI',sans-serif]">
+  <div class="max-w-5xl mx-auto">
+    <!-- Header Section -->
+    <div class="mb-6 animate-slide-down">
+      <h2 class="text-3xl font-semibold mb-2 text-[#2c3e50]">
+        My <span class="text-[#f39c12]">Subjects</span>
+      </h2>
+      <p class="text-[#34495e] font-medium text-lg">
+        Course: Master's of Computer Application [MCA]
+      </p>
     </div>
 
-    <div *ngFor="let subject of subjects; let i = index"
-         class="flex flex-wrap sm:flex-nowrap items-start sm:items-center gap-4 bg-gray-100 rounded-xl p-4 mb-4">
-      <span class="w-8 h-8 flex items-center justify-center border-2 border-gray-300 rounded-full font-bold text-gray-800">{{ i + 1 }}</span>
-      <div class="flex-1 min-w-[220px]">
-        <p><strong>Course Title:</strong> {{ subject.name }}
-          <span class="italic text-sm text-gray-700">(Course Code - {{ subject.courseCode }})</span>
-        </p>
-<p class="text-gray-600 font-bold">
-  {{ subject.assignedFaculty || 'Not yet assigned' }}
-</p>
+    <!-- Loading/Empty State -->
+    <div *ngIf="subjects.length === 0" class="bg-white p-12 rounded-lg shadow-sm text-center animate-fade-in">
+      <p class="text-[#7f8c8d] text-lg">No subjects found.</p>
+    </div>
+
+    <!-- Subjects List -->
+    <div class="space-y-4">
+      <div *ngFor="let subject of subjects; let i = index"
+           class="group bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden animate-slide-up"
+           [style.animation-delay]="(i * 0.08) + 's'">
+        
+        <div class="flex flex-wrap sm:flex-nowrap items-center gap-4 p-5 relative">
+          
+          <!-- Colorful Left Border (matching feedback form theme) -->
+          <div class="absolute left-0 top-0 bottom-0 w-1 transition-all duration-300"
+               [ngClass]="{
+                 'bg-[#3498db]': i % 5 === 0,
+                 'bg-[#f39c12]': i % 5 === 1,
+                 'bg-[#2ecc71]': i % 5 === 2,
+                 'bg-[#9b59b6]': i % 5 === 3,
+                 'bg-[#e74c3c]': i % 5 === 4
+               }"></div>
+          
+          <!-- Number Badge -->
+          <div class="flex-shrink-0 ml-3">
+            <div class="w-10 h-10 flex items-center justify-center border-2 border-[#ecf0f1] rounded-full font-semibold text-[#2c3e50] bg-[#f8f9fa] group-hover:border-[#f39c12] group-hover:text-[#f39c12] transition-all duration-300">
+              {{ i + 1 }}
+            </div>
+          </div>
+
+          <!-- Subject Details -->
+          <div class="flex-1 min-w-[240px]">
+            <p class="text-[#2c3e50] font-semibold text-base mb-1">
+              <span class="font-bold">Course Title:</span> {{ subject.name }}
+              <span class="italic text-sm text-[#7f8c8d] font-normal ml-1">
+                (Course Code - {{ subject.courseCode }})
+              </span>
+            </p>
+            
+            <p class="text-[#34495e] font-semibold text-sm">
+              {{ subject.assignedFaculty || 'Not yet assigned' }}
+            </p>
+          </div>
+
+          <!-- Feedback Button -->
+          <a [routerLink]="['/givefeedback']" 
+             [queryParams]="{ subject: subject.name, courseCode: subject.courseCode, faculty: subject.assignedFaculty }"
+             class="flex-shrink-0">
+            <button class="px-5 py-2.5 bg-[#2c3e50] text-white font-medium rounded-lg hover:bg-[#34495e] transform hover:scale-105 transition-all duration-300 shadow-sm hover:shadow-md flex items-center gap-2">
+              Give Feedback
+              <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              </svg>
+            </button>
+          </a>
+        </div>
       </div>
-<a [routerLink]="['/givefeedback']" [queryParams]="{ subject: subject.name, courseCode: subject.courseCode, faculty: subject.assignedFaculty }">
-  <button class="...">
-    Give Feedback
-  </button>
-</a>
-
-
     </div>
   </div>
 </main>
 
-<footer class="text-center text-white text-sm py-4 bg-[#1e2b38] border-t-4 border-[#0f1a24]">
-  <p>© KJC VOX. All rights reserved.</p>
+<footer class="text-center text-white text-sm py-5 bg-[#2c3e50] border-t-4 border-[#f39c12]">
+  <p class="font-medium">© KJC VOX. All rights reserved.</p>
 </footer>
+
+<style>
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slide-down {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slide-up {
+    from {
+      opacity: 0;
+      transform: translateY(15px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in {
+    animation: fade-in 0.5s ease-out;
+  }
+
+  .animate-slide-down {
+    animation: slide-down 0.5s ease-out;
+  }
+
+  .animate-slide-up {
+    animation: slide-up 0.4s ease-out forwards;
+    opacity: 0;
+  }
+</style>

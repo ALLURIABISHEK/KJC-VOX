@@ -34,6 +34,19 @@ export class UserDashBoardComponent implements OnInit {
   goToMySubjects(): void {
     this.router.navigate(['/usersubjects']);
   }
+  
+
+  showLogout = false;
+
+toggleLogout() {
+  this.showLogout = !this.showLogout;
+}
+
+logout() {
+  // Add your logout logic here
+  this.showLogout = false;
+  // Example: this.router.navigate(['/login']);
+}
 
   loadNotices(): void {
     const noticeFor = 'student'; // You can change this based on role if needed

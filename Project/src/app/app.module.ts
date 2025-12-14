@@ -30,6 +30,7 @@ import { FeedbackFormComponent } from './givefeedback/givefeedback.component';
 import { FacultyDashboardComponent } from './faculty-dashboard/faculty-dashboard.component';
 import { FacultySubsComponent } from './faculty-subs/faculty-subs.component';
 import { FeedbackSummaryComponent } from './facultyfeedback/facultyfeedback.component';
+import { FeedbackHistoryComponent } from './feedback-history/feedback-history.component';
 
 @NgModule({
 declarations: [
@@ -51,7 +52,8 @@ declarations: [
   FeedbackFormComponent,
   FacultyDashboardComponent,
   FacultySubsComponent,
-  FeedbackSummaryComponent  // ✅ ONLY components go here
+  FeedbackSummaryComponent,
+  FeedbackHistoryComponent  // ✅ ONLY components go here
 ],
 
 imports: [

@@ -1,138 +1,331 @@
-<!-- feedback-form.component.html -->
-<div class="min-h-screen bg-gray-100 text-gray-800 font-sans">
+<!-- givefeedback.component.html -->
+<div class="h-screen flex flex-col bg-gradient-to-br from-gray-50 via-blue-50 to-gray-100 overflow-hidden">
   <!-- Header -->
-  <header class="flex justify-between items-center p-3 bg-white border-b border-gray-300">
-    <div class="flex items-center gap-2">
-      <span class="text-2xl cursor-pointer">&#9776;</span>
-      <img 
-        src="https://www.kristujayantiexamlms.com/pluginfile.php/1/core_admin/logocompact/300x300/1752067815/logo2.png" 
-        alt="logo" 
-        class="h-10"
-      />
-      <h1 class="text-xl font-bold">
-        <span class="text-gray-800">KJC</span>
-        <span class="text-yellow-500"> VOX</span>
-      </h1>
-    </div>
-    <div class="w-12 h-12 rounded-full border-2 border-blue-600 p-0.5 bg-white flex justify-center items-center">
-      <img src="avth.png" alt="Avatar" class="w-full h-full rounded-full object-cover" />
+  <header class="bg-white shadow-sm">
+    <div class="max-w-full px-6 py-3">
+      <div class="flex justify-between items-center">
+        <div class="flex items-center gap-3">
+          <button class="text-gray-600 hover:text-gray-900 transition-colors">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+          <img 
+            src="https://www.kristujayantiexamlms.com/pluginfile.php/1/core_admin/logocompact/300x300/1752067815/logo2.png" 
+            alt="logo" 
+            class="h-10 w-10 object-contain"
+          />
+          <h1 class="text-xl font-bold">
+            <span class="text-gray-800">KJC</span>
+            <span class="text-yellow-500"> VOX</span>
+          </h1>
+        </div>
+        <div class="w-10 h-10 rounded-full border-2 border-blue-500 p-0.5 bg-gradient-to-br from-blue-400 to-blue-600 shadow-lg">
+          <div class="w-full h-full rounded-full bg-white flex items-center justify-center overflow-hidden">
+            <img src="avth.png" alt="Avatar" class="w-full h-full rounded-full object-cover" />
+          </div>
+        </div>
+      </div>
     </div>
   </header>
 
   <!-- Main Content -->
-  <main class="flex justify-center p-5">
-    <div class="bg-white rounded-xl p-5 max-w-md w-full shadow-lg">
-      <h2 class="text-center text-xl font-semibold mb-5">
-        Feedback <span class="text-yellow-500">Form</span>
-      </h2>
-
-      <form (ngSubmit)="onSubmit()">
-        <!-- Q1 -->
-        <div class="mb-4">
-          <p class="mb-2 font-medium">1. Was the faculty punctual?</p>
-          <label class="mr-3">
-            <input type="radio" name="punctual" [(ngModel)]="feedback.punctual" value="yes" class="mr-1"> Yes
-          </label>
-          <label>
-            <input type="radio" name="punctual" [(ngModel)]="feedback.punctual" value="no" class="mr-1"> No
-          </label>
+  <main class="flex-1 px-8 py-6 overflow-hidden">
+    <div class="h-full max-w-7xl mx-auto">
+      
+      <!-- Form Header -->
+      <div class="bg-gradient-to-r from-gray-800 to-gray-900 rounded-t-2xl px-6 py-4 shadow-xl">
+        <div class="flex items-center gap-3">
+          <svg class="w-7 h-7 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+          </svg>
+          <div>
+            <h2 class="text-2xl font-bold text-white">
+              Feedback <span class="text-yellow-400">Form</span>
+            </h2>
+            <p class="text-gray-300 text-xs mt-0.5">Your feedback helps us improve teaching quality</p>
+          </div>
         </div>
+      </div>
 
-        <!-- Q2 -->
-        <div class="mb-4">
-          <p class="mb-2 font-medium">2. How was the clarity of explanation?</p>
-          <div class="flex flex-row-reverse justify-end">
-            <input type="radio" id="clarity-5" name="clarity" [(ngModel)]="feedback.clarity" [value]="5" class="hidden">
-            <label for="clarity-5" class="text-2xl text-gray-300 cursor-pointer px-0.5 hover:text-yellow-400">&#9733;</label>
+      <!-- Two Column Layout -->
+      <div class="bg-white rounded-b-2xl shadow-xl h-[calc(100%-5rem)] flex">
+        
+        <!-- LEFT COLUMN - Questions (40%) -->
+        <div class="w-[40%] p-5 border-r-2 border-gray-200 overflow-y-auto">
+          <div class="space-y-4">
             
-            <input type="radio" id="clarity-4" name="clarity" [(ngModel)]="feedback.clarity" [value]="4" class="hidden">
-            <label for="clarity-4" class="text-2xl text-gray-300 cursor-pointer px-0.5 hover:text-yellow-400">&#9733;</label>
-            
-            <input type="radio" id="clarity-3" name="clarity" [(ngModel)]="feedback.clarity" [value]="3" class="hidden">
-            <label for="clarity-3" class="text-2xl text-gray-300 cursor-pointer px-0.5 hover:text-yellow-400">&#9733;</label>
-            
-            <input type="radio" id="clarity-2" name="clarity" [(ngModel)]="feedback.clarity" [value]="2" class="hidden">
-            <label for="clarity-2" class="text-2xl text-gray-300 cursor-pointer px-0.5 hover:text-yellow-400">&#9733;</label>
-            
-            <input type="radio" id="clarity-1" name="clarity" [(ngModel)]="feedback.clarity" [value]="1" class="hidden">
-            <label for="clarity-1" class="text-2xl text-gray-300 cursor-pointer px-0.5 hover:text-yellow-400">&#9733;</label>
+            <!-- Question 1 -->
+            <div class="p-3 rounded-lg bg-gradient-to-r from-blue-50 to-transparent border-l-4 border-blue-500">
+              <p class="font-semibold text-gray-800 text-sm mb-2">1. Was the faculty punctual?</p>
+              <div class="flex gap-4">
+                <label class="flex items-center gap-2 cursor-pointer group">
+                  <input type="radio" name="punctual" [(ngModel)]="feedback.punctual" value="yes" class="w-4 h-4 text-blue-600 cursor-pointer"/>
+                  <span class="text-gray-700 text-sm group-hover:text-blue-600">Yes</span>
+                </label>
+                <label class="flex items-center gap-2 cursor-pointer group">
+                  <input type="radio" name="punctual" [(ngModel)]="feedback.punctual" value="no" class="w-4 h-4 text-blue-600 cursor-pointer"/>
+                  <span class="text-gray-700 text-sm group-hover:text-blue-600">No</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Question 2 -->
+            <div class="p-3 rounded-lg bg-gradient-to-r from-yellow-50 to-transparent border-l-4 border-yellow-500">
+              <p class="font-semibold text-gray-800 text-sm mb-2">2. How was the clarity of explanation?</p>
+              <div class="flex gap-1">
+                <label *ngFor="let star of [1, 2, 3, 4, 5]" class="cursor-pointer hover:scale-110">
+                  <input type="radio" name="clarity" [(ngModel)]="feedback.clarity" [value]="star" class="hidden"/>
+                  <svg [class]="'w-6 h-6 ' + (star <= feedback.clarity ? 'fill-yellow-400 text-yellow-400' : 'fill-gray-200 text-gray-200')" viewBox="0 0 24 24">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                  </svg>
+                </label>
+              </div>
+            </div>
+
+            <!-- Question 3 -->
+            <div class="p-3 rounded-lg bg-gradient-to-r from-green-50 to-transparent border-l-4 border-green-500">
+              <p class="font-semibold text-gray-800 text-sm mb-2">3. Was the class engaging/interactive?</p>
+              <div class="flex gap-4">
+                <label class="flex items-center gap-2 cursor-pointer group">
+                  <input type="radio" name="engaging" [(ngModel)]="feedback.engaging" value="yes" class="w-4 h-4 text-green-600 cursor-pointer"/>
+                  <span class="text-gray-700 text-sm group-hover:text-green-600">Yes</span>
+                </label>
+                <label class="flex items-center gap-2 cursor-pointer group">
+                  <input type="radio" name="engaging" [(ngModel)]="feedback.engaging" value="no" class="w-4 h-4 text-green-600 cursor-pointer"/>
+                  <span class="text-gray-700 text-sm group-hover:text-green-600">No</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Question 4 -->
+            <div class="p-3 rounded-lg bg-gradient-to-r from-purple-50 to-transparent border-l-4 border-purple-500">
+              <p class="font-semibold text-gray-800 text-sm mb-2">4. How comfortable was the pace?</p>
+              <div class="flex gap-4 flex-wrap">
+                <label class="flex items-center gap-2 cursor-pointer group">
+                  <input type="radio" name="pace" [(ngModel)]="feedback.pace" value="slow" class="w-4 h-4 text-purple-600 cursor-pointer"/>
+                  <span class="text-gray-700 text-sm group-hover:text-purple-600">Slow</span>
+                </label>
+                <label class="flex items-center gap-2 cursor-pointer group">
+                  <input type="radio" name="pace" [(ngModel)]="feedback.pace" value="normal" class="w-4 h-4 text-purple-600 cursor-pointer"/>
+                  <span class="text-gray-700 text-sm group-hover:text-purple-600">Normal</span>
+                </label>
+                <label class="flex items-center gap-2 cursor-pointer group">
+                  <input type="radio" name="pace" [(ngModel)]="feedback.pace" value="fast" class="w-4 h-4 text-purple-600 cursor-pointer"/>
+                  <span class="text-gray-700 text-sm group-hover:text-purple-600">Fast</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Question 5 -->
+            <div class="p-3 rounded-lg bg-gradient-to-r from-orange-50 to-transparent border-l-4 border-orange-500">
+              <p class="font-semibold text-gray-800 text-sm mb-2">5. Overall satisfaction</p>
+              <div class="flex gap-1">
+                <label *ngFor="let star of [1, 2, 3, 4, 5]" class="cursor-pointer hover:scale-110">
+                  <input type="radio" name="satisfaction" [(ngModel)]="feedback.satisfaction" [value]="star" class="hidden"/>
+                  <svg [class]="'w-6 h-6 ' + (star <= feedback.satisfaction ? 'fill-yellow-400 text-yellow-400' : 'fill-gray-200 text-gray-200')" viewBox="0 0 24 24">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                  </svg>
+                </label>
+              </div>
+            </div>
+
+            <!-- Question 6 - Comments -->
+            <div class="p-3 rounded-lg bg-gradient-to-r from-pink-50 to-transparent border-l-4 border-pink-500">
+              <p class="font-semibold text-gray-800 text-sm mb-2">6. Additional comments</p>
+              <textarea
+                name="comments"
+                [(ngModel)]="feedback.comments"
+                placeholder="Share your thoughts..."
+                class="w-full p-2 border-2 border-gray-200 rounded-lg resize-none focus:border-pink-500 focus:ring-2 focus:ring-pink-200 outline-none text-gray-700 text-sm h-20"
+              ></textarea>
+            </div>
+
+            <!-- Initial Validate Button -->
+            <button
+              *ngIf="!aiValidationStarted"
+              (click)="validateWithAI()"
+              [disabled]="!isFormValid()"
+              [class]="'w-full py-3 px-4 rounded-lg font-semibold text-sm transition-all flex items-center justify-center gap-2 ' + 
+                       (isFormValid() ? 'bg-gradient-to-r from-blue-600 to-blue-700 text-white hover:from-blue-700 hover:to-blue-800 shadow-lg cursor-pointer' : 'bg-gray-300 text-gray-500 cursor-not-allowed')"
+            >
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              VALIDATE WITH AI
+            </button>
+
           </div>
         </div>
 
-        <!-- Q3 -->
-        <div class="mb-4">
-          <p class="mb-2 font-medium">3. Was the class engaging/interactive?</p>
-          <label class="mr-3">
-            <input type="radio" name="engaging" [(ngModel)]="feedback.engaging" value="yes" class="mr-1"> Yes
-          </label>
-          <label>
-            <input type="radio" name="engaging" [(ngModel)]="feedback.engaging" value="no" class="mr-1"> No
-          </label>
-        </div>
-
-        <!-- Q4 -->
-        <div class="mb-4">
-          <p class="mb-2 font-medium">4. How comfortable was the pace?</p>
-          <label class="mr-3">
-            <input type="radio" name="pace" [(ngModel)]="feedback.pace" value="slow" class="mr-1"> Slow
-          </label>
-          <label class="mr-3">
-            <input type="radio" name="pace" [(ngModel)]="feedback.pace" value="fast" class="mr-1"> Fast
-          </label>
-          <label>
-            <input type="radio" name="pace" [(ngModel)]="feedback.pace" value="normal" class="mr-1"> Normal
-          </label>
-        </div>
-
-        <!-- Q5 -->
-        <div class="mb-4">
-          <p class="mb-2 font-medium">5. Overall satisfaction</p>
-          <div class="flex flex-row-reverse justify-end">
-            <input type="radio" id="sat-5" name="satisfaction" [(ngModel)]="feedback.satisfaction" [value]="5" class="hidden">
-            <label for="sat-5" class="text-2xl text-gray-300 cursor-pointer px-0.5 hover:text-yellow-400">&#9733;</label>
-            
-            <input type="radio" id="sat-4" name="satisfaction" [(ngModel)]="feedback.satisfaction" [value]="4" class="hidden">
-            <label for="sat-4" class="text-2xl text-gray-300 cursor-pointer px-0.5 hover:text-yellow-400">&#9733;</label>
-            
-            <input type="radio" id="sat-3" name="satisfaction" [(ngModel)]="feedback.satisfaction" [value]="3" class="hidden">
-            <label for="sat-3" class="text-2xl text-gray-300 cursor-pointer px-0.5 hover:text-yellow-400">&#9733;</label>
-            
-            <input type="radio" id="sat-2" name="satisfaction" [(ngModel)]="feedback.satisfaction" [value]="2" class="hidden">
-            <label for="sat-2" class="text-2xl text-gray-300 cursor-pointer px-0.5 hover:text-yellow-400">&#9733;</label>
-            
-            <input type="radio" id="sat-1" name="satisfaction" [(ngModel)]="feedback.satisfaction" [value]="1" class="hidden">
-            <label for="sat-1" class="text-2xl text-gray-300 cursor-pointer px-0.5 hover:text-yellow-400">&#9733;</label>
+        <!-- RIGHT COLUMN - AI Validation (60%) -->
+        <div class="w-[60%] p-6 flex flex-col bg-gradient-to-br from-gray-50 to-white">
+          
+          <!-- AI Validation Not Started -->
+          <div *ngIf="!aiValidationStarted" class="flex-1 flex flex-col items-center justify-center text-center">
+            <div class="bg-gradient-to-br from-blue-50 to-purple-50 p-8 rounded-2xl border-2 border-dashed border-blue-300">
+              <svg class="w-20 h-20 mx-auto mb-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+              </svg>
+              <h3 class="text-xl font-bold text-gray-800 mb-2">AI Validation Ready</h3>
+              <p class="text-gray-600 text-sm">Complete the form and click "Validate with AI" to ensure your feedback is constructive and respectful.</p>
+            </div>
           </div>
-        </div>
 
-        <!-- Q6 -->
-        <div class="mb-4">
-          <p class="mb-2 font-medium">6. Additional comments</p>
-          <textarea 
-            [(ngModel)]="feedback.comments" 
-            name="comments" 
-            placeholder="Type here..." 
-            class="w-full h-20 p-2 border border-gray-300 rounded resize-none font-sans"
-          ></textarea>
-        </div>
+          <!-- AI Validation Steps -->
+          <div *ngIf="aiValidationStarted" class="flex-1 flex flex-col">
+            
+            <!-- Step 1: Sending -->
+            <div class="mb-4 p-4 rounded-xl border-2 transition-all" 
+                 [class.border-blue-500]="validationStep === 1"
+                 [class.bg-blue-50]="validationStep === 1"
+                 [class.border-green-500]="validationStep > 1"
+                 [class.bg-green-50]="validationStep > 1"
+                 [class.border-gray-300]="validationStep < 1"
+                 [class.bg-gray-50]="validationStep < 1">
+              <div class="flex items-center gap-3">
+                <div class="flex-shrink-0">
+                  <svg *ngIf="validationStep === 1" class="w-6 h-6 text-blue-600 animate-spin" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
+                  <svg *ngIf="validationStep > 1" class="w-6 h-6 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                  </svg>
+                  <div *ngIf="validationStep < 1" class="w-6 h-6 rounded-full bg-gray-300 flex items-center justify-center text-xs text-gray-600 font-bold">1</div>
+                </div>
+                <div class="flex-1">
+                  <p class="font-semibold text-gray-800">Sending to AI</p>
+                  <p class="text-xs text-gray-500">Connecting to Gemini API...</p>
+                </div>
+              </div>
+            </div>
 
-        <!-- Submit -->
-        <div class="text-center mt-5">
-      <button 
-  type="submit"
-  [disabled]="!feedback.punctual || !feedback.engaging || !feedback.pace || !feedback.clarity || !feedback.satisfaction"
-  class="bg-gray-800 text-white border-none py-2 px-8 text-base rounded cursor-pointer hover:bg-gray-900 disabled:opacity-50 disabled:cursor-not-allowed"
->
-  SUBMIT
-</button>
+            <!-- Step 2: Analyzing -->
+            <div class="mb-4 p-4 rounded-xl border-2 transition-all"
+                 [class.border-purple-500]="validationStep === 2"
+                 [class.bg-purple-50]="validationStep === 2"
+                 [class.border-green-500]="validationStep > 2"
+                 [class.bg-green-50]="validationStep > 2"
+                 [class.border-gray-300]="validationStep < 2"
+                 [class.bg-gray-50]="validationStep < 2">
+              <div class="flex items-center gap-3">
+                <div class="flex-shrink-0">
+                  <svg *ngIf="validationStep === 2" class="w-6 h-6 text-purple-600 animate-spin" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
+                  <svg *ngIf="validationStep > 2" class="w-6 h-6 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                  </svg>
+                  <div *ngIf="validationStep < 2" class="w-6 h-6 rounded-full bg-gray-300 flex items-center justify-center text-xs text-gray-600 font-bold">2</div>
+                </div>
+                <div class="flex-1">
+                  <p class="font-semibold text-gray-800">Analyzing Feedback</p>
+                  <p class="text-xs text-gray-500">AI is reviewing your comments...</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 3: Result -->
+            <div class="mb-4 p-4 rounded-xl border-2 transition-all"
+                 [class.border-yellow-500]="validationStep === 3"
+                 [class.bg-yellow-50]="validationStep === 3"
+                 [class.border-gray-300]="validationStep < 3"
+                 [class.bg-gray-50]="validationStep < 3">
+              <div class="flex items-center gap-3">
+                <div class="flex-shrink-0">
+                  <svg *ngIf="validationStep === 3 && validationResult?.approved" class="w-6 h-6 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                  </svg>
+                  <svg *ngIf="validationStep === 3 && !validationResult?.approved" class="w-6 h-6 text-red-600" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
+                  </svg>
+                  <div *ngIf="validationStep < 3" class="w-6 h-6 rounded-full bg-gray-300 flex items-center justify-center text-xs text-gray-600 font-bold">3</div>
+                </div>
+                <div class="flex-1">
+                  <p class="font-semibold text-gray-800">Validation Result</p>
+                  <p *ngIf="validationStep === 3 && validationResult?.approved" class="text-xs text-green-600 font-medium">✓ Feedback approved!</p>
+                  <p *ngIf="validationStep === 3 && !validationResult?.approved" class="text-xs text-red-600 font-medium">⚠ Needs improvement</p>
+                  <p *ngIf="validationStep < 3" class="text-xs text-gray-500">Waiting for analysis...</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- AI Suggestions (if rejected) -->
+            <div *ngIf="validationStep === 3 && !validationResult?.approved && (validationResult?.suggestions?.length ?? 0) > 0"
+                 class="flex-1 bg-gradient-to-br from-orange-50 to-yellow-50 rounded-xl p-4 border-2 border-orange-300 overflow-y-auto">
+              
+              <div class="flex items-start gap-2 mb-3">
+                <svg class="w-5 h-5 text-orange-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
+                </svg>
+                <div>
+                  <h4 class="font-bold text-gray-800 text-sm">AI Suggestions</h4>
+                  <p class="text-xs text-gray-600">Click on a suggestion to use it, or modify your comment:</p>
+                </div>
+              </div>
+              
+              <div class="space-y-2">
+                <div *ngFor="let suggestion of validationResult?.suggestions ?? []; let i = index"
+                     (click)="applySuggestion(suggestion)"
+                     class="p-3 bg-white rounded-lg border border-orange-200 hover:border-orange-400 hover:shadow-md cursor-pointer transition-all group">
+                  <div class="flex items-start gap-2">
+                    <span class="flex-shrink-0 w-5 h-5 rounded-full bg-orange-200 text-orange-700 text-xs font-bold flex items-center justify-center">{{i + 1}}</span>
+                    <p class="text-sm text-gray-700 group-hover:text-gray-900 flex-1">{{suggestion}}</p>
+                    <svg class="w-4 h-4 text-orange-500 opacity-0 group-hover:opacity-100 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Re-validate Button -->
+              <button
+                (click)="validateWithAI()"
+                class="w-full mt-4 py-2 px-4 bg-gradient-to-r from-orange-500 to-orange-600 text-white rounded-lg font-semibold text-sm hover:from-orange-600 hover:to-orange-700 transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-2">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                </svg>
+                Re-validate Feedback
+              </button>
+            </div>
+
+            <!-- Success Message -->
+            <div *ngIf="validationStep === 3 && validationResult?.approved" 
+                 class="flex-1 bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-6 border-2 border-green-300 flex flex-col items-center justify-center text-center">
+              <svg class="w-16 h-16 text-green-600 mb-3" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+              </svg>
+              <h3 class="text-xl font-bold text-green-800 mb-2">Feedback Approved!</h3>
+              <p class="text-sm text-gray-600 mb-4">Your feedback is constructive and ready to submit.</p>
+            </div>
+
+          </div>
+
+          <!-- Final Submit Button (only visible after approval) -->
+          <div *ngIf="validationResult?.approved" class="mt-4">
+            <button
+              (click)="onSubmit()"
+              class="w-full py-4 px-6 rounded-xl font-semibold text-base bg-gradient-to-r from-gray-800 to-gray-900 text-white hover:from-gray-900 hover:to-black shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-3">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+              </svg>
+              SUBMIT FEEDBACK
+            </button>
+            <p class="text-xs text-gray-500 text-center mt-2">All responses are confidential and used to improve teaching quality</p>
+          </div>
 
         </div>
-      </form>
+      </div>
+
     </div>
   </main>
 
   <!-- Footer -->
-  <footer class="text-center p-4 bg-gray-800 text-white mt-8 text-sm">
-    © KJC VOX. All rights reserved.
+  <footer class="bg-gradient-to-r from-gray-800 to-gray-900 text-white py-3">
+    <div class="px-6 text-center">
+      <p class="text-xs">© 2024 KJC VOX. All rights reserved. | Empowering education through feedback</p>
+    </div>
   </footer>
 </div>

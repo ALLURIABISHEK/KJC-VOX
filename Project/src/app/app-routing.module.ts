@@ -18,7 +18,7 @@ import { FeedbackFormComponent} from './givefeedback/givefeedback.component';
 import {FacultyDashboardComponent} from './faculty-dashboard/faculty-dashboard.component';
 import {FacultySubsComponent } from './faculty-subs/faculty-subs.component';
 import { FeedbackSummaryComponent } from './facultyfeedback/facultyfeedback.component';
-
+import { FeedbackHistoryComponent } from './feedback-history/feedback-history.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -40,6 +40,7 @@ const routes: Routes = [
   { path: 'faculty-dashboard', component: FacultyDashboardComponent },
    { path: 'faculty-subs', component: FacultySubsComponent },
   { path: 'facultyfeedback', component: FeedbackSummaryComponent },
+  {path: 'feedback-history', component: FeedbackHistoryComponent},
   { path: '**', redirectTo: '/forgotpassword' }
 ];
 

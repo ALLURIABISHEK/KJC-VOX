@@ -1,120 +1,184 @@
-<!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>KJC VOX Login</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-[#f6f8fc] flex flex-col min-h-screen font-sans">
-
-  <header class="bg-white flex justify-between items-center px-6 py-4 shadow relative">
-    <div class="flex items-center gap-2">
-      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXuH55vOVHO2LCF7rxvEYAfpEZqj3qvRuKnw&s" alt="Logo" class="h-10" />
-      <span class="text-xl font-bold">KJC <span class="text-[#f4a300]">VOX</span></span>
+<!-- Outer Wrapper -->
+<div class="min-h-screen flex flex-col bg-gradient-to-br from-gray-50 to-gray-100">
+  <!-- Header -->
+  <header class="bg-white flex justify-between items-center px-6 py-4 shadow-sm sticky top-0 z-50">
+    <div class="flex items-center gap-3">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXuH55vOVHO2LCF7rxvEYAfpEZqj3qvRuKnw&s" alt="Logo" class="h-10 rounded-full shadow-sm" />
+      <span class="text-xl md:text-2xl font-bold text-gray-800">
+        KJC <span class="text-yellow-500">VOX</span>
+      </span>
     </div>
 
-    <nav class="hidden md:flex items-center gap-4">
-      <a href="/home" class="text-[#2f4254] font-medium">Home</a>
-      <a href="/register">
-        <button class="bg-[#2f4254] text-white font-semibold px-4 py-2 rounded-md">Register</button>
-      </a>
+    <nav class="flex items-center gap-4">
+      <ul class="hidden md:flex gap-4">
+        <li><a href="/home" class="text-gray-700 font-medium hover:text-yellow-500 px-3 py-2 rounded transition-colors">Home</a></li>
+        <li><a href="/register" class="text-gray-700 font-medium hover:text-yellow-500 px-3 py-2 rounded transition-colors">Register</a></li>
+      </ul>
+
+      <div class="hamburger md:hidden flex flex-col cursor-pointer" (click)="toggleMenu()">
+        <div class="w-6 h-0.5 bg-gray-700 my-1 transition-all"></div>
+        <div class="w-6 h-0.5 bg-gray-700 my-1 transition-all"></div>
+        <div class="w-6 h-0.5 bg-gray-700 my-1 transition-all"></div>
+      </div>
     </nav>
 
-    <!-- Hamburger for mobile -->
-    <div class="flex md:hidden flex-col gap-1 cursor-pointer" (click)="toggleMenu()">
-      <span class="w-6 h-[3px] bg-[#2f4254] rounded"></span>
-      <span class="w-6 h-[3px] bg-[#2f4254] rounded"></span>
-      <span class="w-6 h-[3px] bg-[#2f4254] rounded"></span>
-    </div>
-
-    <div class="absolute top-full left-0 w-full bg-white shadow border-t border-gray-200 flex-col md:hidden hidden" [class.show]="isMobileMenuOpen">
-      <a href="/home" class="px-5 py-4 border-b border-gray-200 text-[#2f4254]" (click)="closeMobileMenu()">Home</a>
-      <a href="/register" class="px-5 py-4 border-b border-gray-200 text-[#2f4254]" (click)="closeMobileMenu()">Register</a>
-    </div>
+    <!-- Mobile Menu -->
+    <ul [ngClass]="{ 'hidden': !isMobileMenuOpen }" class="md:hidden flex flex-col gap-2 absolute right-6 top-16 bg-white p-4 w-48 shadow-lg rounded-lg">
+      <li><a href="/home" class="text-gray-700 font-medium hover:text-yellow-500 px-3 py-2 rounded transition-colors block" (click)="closeMobileMenu()">Home</a></li>
+      <li><a href="/register" class="text-gray-700 font-medium hover:text-yellow-500 px-3 py-2 rounded transition-colors block" (click)="closeMobileMenu()">Register</a></li>
+    </ul>
   </header>
 
-  <main class="flex-1 flex justify-center items-center px-5 py-10">
-    <div class="flex flex-col md:flex-row bg-white w-full max-w-[1100px] rounded-lg overflow-hidden shadow border border-gray-300">
-      
-      <!-- Left -->
-      <div class="md:flex-[0.8] p-8 md:p-10 text-center border-b md:border-b-0 md:border-r border-gray-300">
-        <h2 class="text-2xl font-semibold mb-2">Login to KJC <span class="text-[#f4a300]">VOX</span></h2>
-        <p class="text-sm text-gray-700">Secure access for students, faculties & admins</p>
-        <img src="assets/Lock-IN.png" alt="Illustration" class="w-full max-w-sm mx-auto my-6" />
-        <p class="text-sm text-[#2f4254] font-medium">A private, secure platform for honest feedback and academic reflection</p>
+  <!-- Main Content -->
+  <main class="flex-1 flex justify-center items-center px-5 py-12">
+    <div class="w-full max-w-6xl">
+      <!-- Title Section -->
+      <div class="text-center mb-10">
+        <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-3">
+          Login to <span class="text-yellow-500">Get Started</span>
+        </h1>
+        <p class="text-gray-600 text-sm md:text-base max-w-2xl mx-auto">
+          Secure access for students, faculties & admins. Your data is safe and anonymous.
+        </p>
       </div>
 
-      <!-- Right -->
-      <div class="md:flex-[1.4] bg-[#2f4254] text-white p-8 md:p-10 flex flex-col justify-center">
-        <form #loginForm="ngForm" (ngSubmit)="submitLoginForm()" novalidate class="w-full">
+      <!-- Card Container -->
+      <div class="bg-white rounded-2xl shadow-xl overflow-hidden max-w-4xl mx-auto">
+        <div class="flex flex-col md:flex-row">
           
-          <!-- Email -->
-          <div class="mb-4">
-            <label for="email" class="block mb-1 text-sm">Email</label>
-            <input 
-              type="email"
-              id="email"
-              name="email"
-              [(ngModel)]="email"
-              placeholder="name@kristujayanti.com"
-              required
-              #emailInput="ngModel"
-              [class.border-red-500]="emailInput.invalid && emailInput.touched"
-              class="w-full px-3 py-2 rounded-md text-black bg-gray-100 border border-gray-300 focus:outline-none"
-            />
-            <div *ngIf="emailInput.invalid && emailInput.touched" class="text-sm text-red-200 mt-1">
-              <span *ngIf="emailInput.errors?.['required']">Email is required</span>
-              <span *ngIf="emailInput.errors?.['email']">Please enter a valid email</span>
+          <!-- Left Side - Info Section -->
+          <div class="md:w-2/5 bg-gradient-to-br from-blue-50 to-green-50 p-8 flex flex-col justify-center items-center text-center">
+            <div class="mb-6">
+              <img src="assets/registerr.png" alt="Secure Lock" class="w-48 h-48 mx-auto mb-4 drop-shadow-2xl transform hover:scale-110 transition-all duration-300" />
+              <h2 class="text-2xl font-bold text-gray-800 mb-2">
+                KJC <span class="text-yellow-500">VOX</span>
+              </h2>
+              <p class="text-sm text-gray-600 mb-4">Secure Login Portal</p>
+            </div>
+            
+            <div class="space-y-4 text-left w-full max-w-xs">
+              <div class="flex items-start gap-3 bg-white/60 p-3 rounded-lg backdrop-blur-sm hover:bg-white hover:shadow-md transform hover:-translate-y-1 transition-all duration-300 cursor-pointer">
+                <span class="text-2xl">🔒</span>
+                <div>
+                  <h3 class="font-semibold text-gray-800 text-sm">Secure Platform</h3>
+                  <p class="text-xs text-gray-600">Your data is encrypted and protected</p>
+                </div>
+              </div>
+              
+              <div class="flex items-start gap-3 bg-white/60 p-3 rounded-lg backdrop-blur-sm hover:bg-white hover:shadow-md transform hover:-translate-y-1 transition-all duration-300 cursor-pointer">
+                <span class="text-2xl">💬</span>
+                <div>
+                  <h3 class="font-semibold text-gray-800 text-sm">Honest Feedback</h3>
+                  <p class="text-xs text-gray-600">Share your thoughts anonymously</p>
+                </div>
+              </div>
+              
+              <div class="flex items-start gap-3 bg-white/60 p-3 rounded-lg backdrop-blur-sm hover:bg-white hover:shadow-md transform hover:-translate-y-1 transition-all duration-300 cursor-pointer">
+                <span class="text-2xl">📚</span>
+                <div>
+                  <h3 class="font-semibold text-gray-800 text-sm">Academic Growth</h3>
+                  <p class="text-xs text-gray-600">Improve teaching and learning</p>
+                </div>
+              </div>
             </div>
           </div>
 
-          <!-- Password -->
-          <div class="mb-4">
-            <label for="password" class="block mb-1 text-sm">Password</label>
-            <input 
-              type="password"
-              id="password"
-              name="password"
-              [(ngModel)]="password"
-              placeholder="****"
-              required
-              #passwordInput="ngModel"
-              [class.border-red-500]="passwordInput.invalid && passwordInput.touched"
-              class="w-full px-3 py-2 rounded-md text-black bg-gray-100 border border-gray-300 focus:outline-none"
-            />
-            <div *ngIf="passwordInput.invalid && passwordInput.touched" class="text-sm text-red-200 mt-1">
-              <span *ngIf="passwordInput.errors?.['required']">Password is required</span>
+          <!-- Right Side - Form Section -->
+          <div class="md:w-3/5 bg-gradient-to-br from-slate-700 to-slate-800 p-8 md:p-10">
+            <div class="max-w-md mx-auto">
+              <h2 class="text-2xl font-bold text-white mb-2">Welcome Back</h2>
+              <p class="text-gray-300 text-sm mb-6">Sign in to access your account</p>
+              
+              <form #loginForm="ngForm" (ngSubmit)="submitLoginForm()" novalidate class="space-y-5">
+                <!-- Email Field -->
+                <div>
+                  <label class="block text-sm font-medium text-gray-200 mb-2" for="email">
+                    Email Address
+                  </label>
+                  <div class="relative">
+                    <span class="absolute left-3 top-3 text-gray-400">📧</span>
+                    <input 
+                      type="email"
+                      id="email"
+                      name="email"
+                      [(ngModel)]="email"
+                      placeholder="name@kristujayanti.com"
+                      required
+                      #emailInput="ngModel"
+                      class="w-full pl-10 pr-4 py-3 rounded-lg border-2 border-transparent focus:border-yellow-500 focus:outline-none text-gray-800 bg-white placeholder-gray-400 transition-all" 
+                      [class.border-red-500]="emailInput.invalid && emailInput.touched"
+                    />
+                  </div>
+                  <div *ngIf="emailInput.invalid && emailInput.touched" class="text-sm text-red-300 mt-1">
+                    <span *ngIf="emailInput.errors?.['required']">Email is required</span>
+                    <span *ngIf="emailInput.errors?.['email']">Please enter a valid email</span>
+                  </div>
+                </div>
+
+                <!-- Password Field -->
+                <div>
+                  <label class="block text-sm font-medium text-gray-200 mb-2" for="password">
+                    Password
+                  </label>
+                  <div class="relative">
+                    <span class="absolute left-3 top-3 text-gray-400">🔑</span>
+                    <input 
+                      type="password"
+                      id="password"
+                      name="password"
+                      [(ngModel)]="password"
+                      placeholder="Enter your password"
+                      required
+                      #passwordInput="ngModel"
+                      class="w-full pl-10 pr-4 py-3 rounded-lg border-2 border-transparent focus:border-yellow-500 focus:outline-none text-gray-800 bg-white placeholder-gray-400 transition-all" 
+                      [class.border-red-500]="passwordInput.invalid && passwordInput.touched"
+                    />
+                  </div>
+                  <div *ngIf="passwordInput.invalid && passwordInput.touched" class="text-sm text-red-300 mt-1">
+                    <span *ngIf="passwordInput.errors?.['required']">Password is required</span>
+                  </div>
+                </div>
+
+                <!-- Forgot Password -->
+                <div class="text-right">
+                  <a href="/forgot-password" class="text-sm text-gray-300 hover:text-white underline transition-colors">
+                    Forgot Password?
+                  </a>
+                </div>
+
+                <!-- Submit Button -->
+                <button 
+                  type="submit"
+                  class="w-full bg-yellow-500 text-white font-bold py-3 rounded-lg hover:bg-yellow-600 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+                  [disabled]="isSubmitting || loginForm.invalid"
+                >
+                  <span *ngIf="!isSubmitting">🚀 Sign In</span>
+                  <span *ngIf="isSubmitting" class="flex items-center justify-center gap-2">
+                    <span class="animate-spin h-4 w-4 border-2 border-white border-t-transparent rounded-full"></span>
+                    Signing in...
+                  </span>
+                </button>
+
+                <!-- Error Message -->
+                <div *ngIf="errorMessage" class="bg-red-500/20 border border-red-400 text-red-200 px-4 py-3 rounded-lg text-sm text-center">
+                  {{ errorMessage }}
+                </div>
+
+                <!-- Privacy Notice -->
+                <div class="flex items-center justify-center gap-2 pt-2">
+                  <span class="text-xl">🔒</span>
+                  <p class="text-xs text-gray-300">Your data is secure and anonymous</p>
+                </div>
+              </form>
             </div>
           </div>
-
-          <!-- Forgot -->
-          <a href="/forgot-password" class="text-sm text-gray-300 underline block text-right mb-4 cursor-pointer">Forgot Password?</a>
-
-          <!-- Submit Button -->
-          <button 
-            type="submit"
-            class="w-full py-2 border border-white rounded-md hover:bg-white hover:text-[#2f4254] transition text-white"
-            [disabled]="isSubmitting || loginForm.invalid"
-          >
-            <span *ngIf="!isSubmitting">Sign in</span>
-            <span *ngIf="isSubmitting" class="flex items-center justify-center gap-2">
-              <span class="animate-spin h-4 w-4 border-2 border-white border-t-transparent rounded-full"></span>
-              Signing in...
-            </span>
-          </button>
-
-          <!-- Error Message -->
-          <div *ngIf="errorMessage" class="text-red-200 mt-4 text-sm text-center">
-            {{ errorMessage }}
-          </div>
-        </form>
+        </div>
       </div>
     </div>
   </main>
 
-  <footer class="bg-[#1c2a38] text-white text-center py-3 text-sm">
-    <p>© KJC VOX. All rights reserved.</p>
+  <!-- Footer -->
+  <footer class="bg-slate-800 text-gray-300 text-center py-4 text-sm">
+    © 2025 KJC VOX. All rights reserved.
   </footer>
-</body>
-</html>
+</div>

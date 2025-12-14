@@ -1,45 +1,247 @@
 <!-- Header -->
-<header class="flex justify-between items-center px-5 py-3 border-b-2 border-gray-300 bg-white">
+<header class="flex justify-between items-center px-5 py-3 border-b-2 border-gray-300 bg-white shadow-sm">
   <div class="flex items-center gap-3">
     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXuH55vOVHO2LCF7rxvEYAfpEZqj3qvRuKnw&s" class="w-10 h-10" alt="KJC Logo" />
     <h1 class="text-xl font-bold text-gray-800">KJC <span class="text-yellow-500">VOX</span></h1>
   </div>
   <div class="w-10 h-10 rounded-full overflow-hidden">
-    <img src="assets\AdminIcon.jpg" class="w-full h-full object-cover" alt="Avatar" />
+    <img src="assets/AdminIcon.jpg" class="w-full h-full object-cover" alt="Avatar" />
   </div>
 </header>
 
 <!-- Main Content -->
-<main class="max-w-5xl mx-auto my-6 p-5 bg-white rounded-xl shadow-md border-2 border-gray-800">
+<main class="max-w-7xl mx-auto my-6 p-5">
   <!-- Dropdown -->
   <div class="mb-5">
     <select [(ngModel)]="selectedMonth"
-      class="w-full sm:w-auto px-4 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-yellow-400">
+      class="w-full sm:w-auto px-4 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-yellow-400 bg-white shadow-sm">
       <option *ngFor="let month of months" [value]="month">{{ month }}</option>
     </select>
   </div>
 
   <!-- Title -->
-  <h2 class="text-center text-2xl sm:text-3xl font-bold text-gray-800 mb-6">
-    My <span class="text-yellow-500">Feedback</span>
+  <h2 class="text-center text-3xl sm:text-4xl font-bold text-gray-800 mb-8">
+    <span class="text-yellow-500">{{ subjectName }}</span> Subject <span class="text-yellow-500">Feedback</span> Analysis
   </h2>
 
-  <!-- Feedback Content -->
-  <div class="flex flex-col md:flex-row gap-6">
-    <!-- Stats Cards -->
-    <div class="flex-1 space-y-4">
-      <div *ngFor="let stat of feedbackStats" class="border border-gray-300 rounded-lg p-4 shadow-sm bg-white">
-        <h3 class="text-base font-semibold text-gray-800">{{ stat.title }}</h3>
-        <p class="mt-2 font-bold text-gray-700">{{ stat.value }}</p>
+  <!-- Overall Satisfaction Score -->
+  <div class="bg-gradient-to-r from-purple-50 to-blue-50 rounded-2xl p-6 mb-8 border-2 border-purple-200 shadow-lg">
+    <h3 class="text-center text-xl font-bold text-gray-800 mb-4">Overall Satisfaction Score</h3>
+    <div class="flex justify-center items-center">
+      <!-- Radial Progress Circle -->
+      <div class="relative inline-flex items-center justify-center">
+        <svg width="220" height="220" class="transform -rotate-90">
+          <!-- Background circle -->
+          <circle cx="110" cy="110" r="80" stroke="#e5e7eb" stroke-width="20" fill="none"></circle>
+          <!-- Progress circle -->
+          <circle cx="110" cy="110" r="80" 
+                  [attr.stroke]="getColor(satisfactionScore)" 
+                  stroke-width="20" 
+                  fill="none"
+                  [attr.stroke-dasharray]="502.4"
+                  [attr.stroke-dashoffset]="502.4 - (satisfactionScore / 100) * 502.4"
+                  stroke-linecap="round"
+                  class="transition-all duration-1000 ease-out"
+                  [style.filter]="'drop-shadow(0 0 8px ' + getColor(satisfactionScore) + '80)'">
+          </circle>
+        </svg>
+        <div class="absolute flex flex-col items-center">
+          <span class="text-5xl font-bold" [ngClass]="getColorClass(satisfactionScore)">
+            {{ satisfactionScore }}%
+          </span>
+          <span class="text-sm text-gray-600 mt-1">Satisfaction</span>
+        </div>
+      </div>
+    </div>
+    <p class="text-center mt-4 text-gray-600 text-sm">
+      Based on Punctuality, Clarity, and Engagement metrics
+    </p>
+  </div>
+
+  <!-- Main Dashboard Grid -->
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+    <!-- Left Column: Progress Bars -->
+    <div class="lg:col-span-2 bg-white rounded-2xl p-6 shadow-lg border-2 border-gray-200">
+      <h3 class="text-xl font-bold text-gray-800 mb-6 flex items-center">
+        <svg class="w-6 h-6 mr-2 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
+          <path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z"></path>
+        </svg>
+        Performance Metrics
+      </h3>
+
+      <!-- Punctuality Bar -->
+      <div class="mb-8">
+        <div class="flex justify-between items-center mb-2">
+          <span class="font-semibold text-gray-700 text-lg">📌 Punctuality</span>
+          <span class="font-bold text-xl" [ngClass]="getColorClass(punctualityPercent)">
+            {{ punctualityPercent }}%
+          </span>
+        </div>
+        <div class="w-full bg-gray-200 rounded-full h-8 overflow-hidden shadow-inner">
+          <div class="h-full rounded-full transition-all duration-1000 ease-out flex items-center justify-end px-3"
+               [style.width.%]="punctualityPercent"
+               [style.background-color]="getColor(punctualityPercent)"
+               [style.box-shadow]="'0 0 10px ' + getColor(punctualityPercent) + '50'">
+            <span class="text-white text-sm font-bold" *ngIf="punctualityPercent > 10">
+              {{ punctualityPercent }}%
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Clarity Rating with Stars -->
+      <div class="mb-8">
+        <div class="flex justify-between items-center mb-2">
+          <span class="font-semibold text-gray-700 text-lg">⭐ Clarity of Explanation</span>
+          <span class="font-bold text-xl" [ngClass]="getColorClass((clarityRating/5)*100)">
+            {{ clarityRating }}/5
+          </span>
+        </div>
+        <!-- Star Display -->
+        <div class="flex gap-2 mb-3">
+          <span *ngFor="let star of getStars(clarityRating)" 
+                class="text-4xl transition-all duration-300"
+                [class.text-yellow-400]="star === 1"
+                [class.text-gray-300]="star === 0">
+            ★
+          </span>
+        </div>
+        <!-- Bar representation -->
+        <div class="w-full bg-gray-200 rounded-full h-8 overflow-hidden shadow-inner">
+          <div class="h-full rounded-full transition-all duration-1000 ease-out flex items-center justify-end px-3"
+               [style.width.%]="(clarityRating/5)*100"
+               [style.background-color]="getColor((clarityRating/5)*100)"
+               [style.box-shadow]="'0 0 10px ' + getColor((clarityRating/5)*100) + '50'">
+            <span class="text-white text-sm font-bold" *ngIf="(clarityRating/5)*100 > 10">
+              {{ ((clarityRating/5)*100).toFixed(0) }}%
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Engagement Bar -->
+      <div class="mb-6">
+        <div class="flex justify-between items-center mb-2">
+          <span class="font-semibold text-gray-700 text-lg">🎯 Student Engagement</span>
+          <span class="font-bold text-xl" [ngClass]="getColorClass(engagementPercent)">
+            {{ engagementPercent }}%
+          </span>
+        </div>
+        <div class="w-full bg-gray-200 rounded-full h-8 overflow-hidden shadow-inner">
+          <div class="h-full rounded-full transition-all duration-1000 ease-out flex items-center justify-end px-3"
+               [style.width.%]="engagementPercent"
+               [style.background-color]="getColor(engagementPercent)"
+               [style.box-shadow]="'0 0 10px ' + getColor(engagementPercent) + '50'">
+            <span class="text-white text-sm font-bold" *ngIf="engagementPercent > 10">
+              {{ engagementPercent }}%
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Color Legend -->
+      <div class="mt-6 pt-4 border-t border-gray-200">
+        <p class="text-sm text-gray-600 mb-2 font-semibold">Performance Scale:</p>
+        <div class="flex gap-4 flex-wrap">
+          <div class="flex items-center gap-2">
+            <div class="w-4 h-4 rounded-full bg-green-500"></div>
+            <span class="text-xs text-gray-600">76-100% Excellent</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <div class="w-4 h-4 rounded-full bg-yellow-500"></div>
+            <span class="text-xs text-gray-600">41-75% Good</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <div class="w-4 h-4 rounded-full bg-red-500"></div>
+            <span class="text-xs text-gray-600">0-40% Needs Improvement</span>
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- Comments -->
-    <div class="flex-1 border border-gray-300 rounded-lg p-4 shadow-sm bg-white max-h-[350px] overflow-y-auto">
-      <h3 class="text-lg font-semibold text-gray-800 mb-3">Comments</h3>
-      <p *ngFor="let comment of comments" class="text-sm font-medium text-gray-700 mb-2">
-        {{ comment }}
+    <!-- Right Column: Punctuality Donut -->
+    <div class="bg-white rounded-2xl p-6 shadow-lg border-2 border-gray-200">
+      <h3 class="text-xl font-bold text-gray-800 mb-4 text-center">
+        ⏰ Punctuality Overview
+      </h3>
+      <div class="relative flex justify-center items-center" style="height: 280px;">
+        <canvas id="punctualityDonut"></canvas>
+        <div class="absolute flex flex-col items-center pointer-events-none">
+          <span class="text-4xl font-bold" [ngClass]="getColorClass(punctualityPercent)">
+            {{ punctualityPercent }}%
+          </span>
+          <span class="text-sm text-gray-600">Punctual</span>
+        </div>
+      </div>
+      <p class="text-center text-sm text-gray-600 mt-4">
+        Students reporting timely class starts
       </p>
+    </div>
+  </div>
+
+  <!-- Charts Row -->
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+    <!-- Pace Distribution Pie Chart -->
+    <div class="bg-white rounded-2xl p-6 shadow-lg border-2 border-gray-200">
+      <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+        <svg class="w-6 h-6 mr-2 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
+        </svg>
+        Teaching Pace Distribution
+      </h3>
+      <div style="height: 300px;">
+        <canvas id="paceChart"></canvas>
+      </div>
+      <div class="mt-4 grid grid-cols-3 gap-2 text-center">
+        <div class="p-2 bg-green-50 rounded-lg border border-green-200">
+          <p class="text-2xl font-bold text-green-600">{{ paceNormal }}</p>
+          <p class="text-xs text-gray-600">Normal</p>
+        </div>
+        <div class="p-2 bg-red-50 rounded-lg border border-red-200">
+          <p class="text-2xl font-bold text-red-600">{{ paceFast }}</p>
+          <p class="text-xs text-gray-600">Fast</p>
+        </div>
+        <div class="p-2 bg-blue-50 rounded-lg border border-blue-200">
+          <p class="text-2xl font-bold text-blue-600">{{ paceSlow }}</p>
+          <p class="text-xs text-gray-600">Slow</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Comments Section -->
+    <div class="bg-white rounded-2xl p-6 shadow-lg border-2 border-gray-200">
+      <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+        <svg class="w-6 h-6 mr-2 text-purple-500" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z" clip-rule="evenodd"></path>
+        </svg>
+        Student Comments
+      </h3>
+      <div class="max-h-80 overflow-y-auto space-y-3 pr-2">
+        <div *ngFor="let comment of comments; let i = index" 
+             class="bg-gradient-to-r from-gray-50 to-blue-50 p-4 rounded-lg border-l-4 border-blue-400 shadow-sm hover:shadow-md transition-shadow duration-200">
+          <div class="flex items-start gap-3">
+            <div class="flex-shrink-0 w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold text-sm">
+              {{ i + 1 }}
+            </div>
+            <p class="text-sm text-gray-700 leading-relaxed flex-1">{{ comment }}</p>
+          </div>
+        </div>
+        <div *ngIf="comments.length === 0" class="text-center text-gray-400 py-8">
+          <svg class="w-16 h-16 mx-auto mb-2 opacity-50" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z" clip-rule="evenodd"></path>
+          </svg>
+          <p>No comments available</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Summary Stats Cards -->
+  <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+    <div *ngFor="let stat of feedbackStats" 
+         class="bg-gradient-to-br from-white to-gray-50 rounded-xl p-4 shadow-md border-2 border-gray-200 hover:shadow-lg transition-all duration-300 hover:scale-105">
+      <h4 class="text-xs font-semibold text-gray-600 mb-2 uppercase tracking-wide">{{ stat.title }}</h4>
+      <p class="text-2xl font-bold text-gray-800">{{ stat.value }}</p>
     </div>
   </div>
 </main>

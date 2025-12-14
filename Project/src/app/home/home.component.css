@@ -1,0 +1,86 @@
+/* Existing animation */
+
+
+/* Graduation Cap Floating Animations */
+@keyframes floatCap1 {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-25px) rotate(5deg);
+  }
+}
+
+@keyframes floatCap2 {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-30px) rotate(-8deg);
+  }
+}
+
+@keyframes floatCap3 {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-20px) rotate(10deg);
+  }
+}
+
+@keyframes floatCap4 {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-28px) rotate(-6deg);
+  }
+}
+
+@keyframes floatCap5 {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-22px) rotate(7deg);
+  }
+}
+
+@keyframes floatCap6 {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-26px) rotate(-5deg);
+  }
+}
+
+.animate-float-cap-1 {
+  animation: floatCap1 4s ease-in-out infinite;
+}
+
+.animate-float-cap-2 {
+  animation: floatCap2 5s ease-in-out infinite;
+  animation-delay: 0.5s;
+}
+
+.animate-float-cap-3 {
+  animation: floatCap3 4.5s ease-in-out infinite;
+  animation-delay: 1s;
+}
+
+.animate-float-cap-4 {
+  animation: floatCap4 4.2s ease-in-out infinite;
+  animation-delay: 0.8s;
+}
+
+.animate-float-cap-5 {
+  animation: floatCap5 5.5s ease-in-out infinite;
+  animation-delay: 1.2s;
+}
+
+.animate-float-cap-6 {
+  animation: floatCap6 4.8s ease-in-out infinite;
+  animation-delay: 0.3s;
+}

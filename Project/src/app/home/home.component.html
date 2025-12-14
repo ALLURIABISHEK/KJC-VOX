@@ -1,113 +1,96 @@
-<nav class="bg-white shadow-md relative z-50">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex justify-between items-center h-16 w-full">
-      
-      <!-- Left: Logo and Brand (flush left) -->
-      <div class="flex items-center">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXuH55vOVHO2LCF7rxvEYAfpEZqj3qvRuKnw&s" alt="logo" class="h-10 mr-2">
-        <h2 class="text-xl font-bold whitespace-nowrap">KJC <span class="text-orange-500">VOX</span></h2>
-      </div>
-
-      <!-- Right: Desktop Nav Links (flush right) -->
-      <div class="hidden md:flex items-center space-x-8">
-        <a href="#home" class="text-gray-700 font-medium hover:text-orange-500 transition">Home</a>
-        <a href="#features" class="text-gray-700 font-medium hover:text-orange-500 transition">Features</a>
-        <a href="#about" class="text-gray-700 font-medium hover:text-orange-500 transition">About</a>
-      </div>
-
-      <!-- Hamburger (Mobile Only) -->
-      <div class="md:hidden">
-        <button (click)="toggleMenu()" class="focus:outline-none">
-          <div class="space-y-1">
-            <div class="w-6 h-0.5 bg-gray-800"></div>
-            <div class="w-6 h-0.5 bg-gray-800"></div>
-            <div class="w-6 h-0.5 bg-gray-800"></div>
-          </div>
-        </button>
-      </div>
-    </div>
+<!-- hero.component.html -->
+<section class="relative w-full min-h-screen overflow-hidden bg-white">
+  
+  <!-- Book Background - positioned to cover the page -->
+  <div class="absolute inset-0 flex items-center justify-center">
+    <img
+      src="assets/Adobe Express - file.png"
+      alt="Book Background"
+      class="w-full h-full object-contain"
+      style="max-width: 1100px; max-height: 700px;"
+    />
   </div>
 
-  <!-- Mobile Dropdown Menu -->
-  <div [ngClass]="{'flex': mobileNavOpen, 'hidden': !mobileNavOpen}" class="md:hidden flex-col px-4 pb-4 pt-2 bg-white shadow-lg">
-    <a href="#home" (click)="closeMenu()" class="block py-2 text-gray-700 font-medium hover:bg-gray-100 rounded">Home</a>
-    <a href="#features" (click)="closeMenu()" class="block py-2 text-gray-700 font-medium hover:bg-gray-100 rounded">Features</a>
-    <a href="#about" (click)="closeMenu()" class="block py-2 text-gray-700 font-medium hover:bg-gray-100 rounded">About</a>
-  </div>
-</nav>
-
-
-<!-- Hero Section -->
-<section id="home" class="py-20 px-4">
-  <div class="max-w-6xl mx-auto flex flex-col lg:flex-row items-center gap-12">
-    <div class="flex-1">
-      <img src="assets\Home-Page (Main Image).png" alt="Feedback Illustration" class="w-full max-w-xl mx-auto rounded-lg" />
-    </div>
-    <div class="flex-1 text-center lg:text-left">
-      <h1 class="text-4xl font-bold mb-4">Welcome to <span class="text-orange-500">KJC VOX</span></h1>
-      <p class="text-lg text-gray-600 mb-6">A Safe space for Students to share honest feedback</p>
-      <div class="hidden md:block bg-gray-800 text-white p-6 rounded-lg text-left leading-relaxed max-w-lg">
-        KJC VOX is an institutional feedback platform designed to facilitate anonymous, constructive communication between students and faculty at the institution.<br /><br />
-        It enables students to provide honest insights on classroom experiences, while empowering faculty and administrators with suitable feedback to enhance academic quality.
-      </div>
-      <div class="md:hidden bg-gray-800 text-white p-4 rounded-lg text-sm leading-relaxed mb-4">
-        KJC VOX is a platform for anonymous, constructive student feedback, enabling students to share classroom experiences and helping faculty and administrators improve academic quality.
-      </div>
-      <a href="/role-selection">
-  <button class="mt-4 px-6 py-3 border-2 border-gray-800 text-gray-800 font-bold rounded hover:bg-gray-800 hover:text-white transition w-full sm:w-auto">
-    Choose your role
-  </button>
-</a>
-    </div>
-  </div>
-</section>
-
-<!-- Features Section -->
-<section id="features" class="bg-gray-100 py-20 px-4">
-  <div class="max-w-6xl mx-auto text-center mb-12">
-    <h2 class="text-3xl font-bold mb-4">Our <span class="text-orange-500">Features</span></h2>
-    <p class="text-gray-600">Discover what makes KJC VOX the perfect feedback platform for your institution.</p>
+  <!-- Floating Graduation Caps - Left Side -->
+  <div class="absolute left-8 top-20 animate-float-cap-1">
+    <svg class="w-12 h-12 text-orange-400 opacity-60" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zm-6.5 8.5v4l6.5 3.5 6.5-3.5v-4L12 15l-6.5-3.5z"/>
+    </svg>
   </div>
 
-  <div class="relative overflow-hidden max-w-4xl mx-auto">
-    <div
-      class="flex transition-transform duration-700 ease-in-out"
-      [style.transform]="'translateX(-' + currentSlide * 100 + '%)'"
-    >
-      <div
-        class="min-w-full p-6 bg-white flex flex-col md:flex-row gap-6 items-center shadow-md"
-        *ngFor="let feature of features"
-      >
-        <div class="flex-shrink-0 text-5xl text-white bg-gray-800 w-24 h-24 flex items-center justify-center rounded-full">
-          {{ feature.icon }}
-        </div>
-        <div>
-          <h3 class="text-2xl font-semibold mb-2 text-gray-800">{{ feature.title }}</h3>
-          <p class="text-gray-600">{{ feature.desc }}</p>
-        </div>
-      </div>
-    </div>
+  <div class="absolute left-16 bottom-32 animate-float-cap-2">
+    <svg class="w-10 h-10 text-orange-500 opacity-50" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zm-6.5 8.5v4l6.5 3.5 6.5-3.5v-4L12 15l-6.5-3.5z"/>
+    </svg>
   </div>
-</section>
 
-<!-- About Section -->
-<section id="about" class="py-20 px-4 bg-white">
-  <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 items-center">
-    <div>
-      <h2 class="text-3xl font-bold mb-6">About <span class="text-orange-500">KJC VOX</span></h2>
-      <p class="text-gray-600 mb-4 leading-relaxed">
-        KJC VOX was born from the need to bridge the communication gap between students and faculty at Kristu Jayanti
-        College...
+  <div class="absolute left-24 top-1/3 animate-float-cap-3">
+    <svg class="w-8 h-8 text-orange-300 opacity-70" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zm-6.5 8.5v4l6.5 3.5 6.5-3.5v-4L12 15l-6.5-3.5z"/>
+    </svg>
+  </div>
+
+  <!-- Floating Graduation Caps - Right Side -->
+  <div class="absolute right-12 top-24 animate-float-cap-4">
+    <svg class="w-11 h-11 text-orange-400 opacity-65" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zm-6.5 8.5v4l6.5 3.5 6.5-3.5v-4L12 15l-6.5-3.5z"/>
+    </svg>
+  </div>
+
+  <div class="absolute right-20 bottom-40 animate-float-cap-5">
+    <svg class="w-9 h-9 text-orange-500 opacity-55" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zm-6.5 8.5v4l6.5 3.5 6.5-3.5v-4L12 15l-6.5-3.5z"/>
+    </svg>
+  </div>
+
+  <div class="absolute right-8 top-1/2 animate-float-cap-6">
+    <svg class="w-10 h-10 text-orange-300 opacity-60" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zm-6.5 8.5v4l6.5 3.5 6.5-3.5v-4L12 15l-6.5-3.5z"/>
+    </svg>
+  </div>
+
+  <!-- Teacher - Left of Center (beside book spine) -->
+  <div class="absolute left-1/2 top-1/2 transform -translate-x-[280px] md:-translate-x-[350px] lg:-translate-x-[420px] -translate-y-[55%] animate-float-slow">
+    <img
+      src="assets/Adobe Express - file (2).png"
+      alt="Teacher"
+      class="w-56 h-56 md:w-64 md:h-64 lg:w-72 lg:h-72 object-contain drop-shadow-2xl"
+    />
+  </div>
+
+  <!-- Student - Right of Center (beside book spine) -->
+  <div class="absolute left-1/2 top-1/2 transform scale-150 -translate-x-[260px] md:translate-x-[110px] lg:translate-x-[180px] -translate-y-[180px] animate-float-slow-delayed">
+    <img
+      src="assets/student1.png"
+      alt="Student"
+      class="w-32 h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 object-contain drop-shadow-2xl"
+    />
+  </div>
+
+  <!-- Main Content -->
+  <div class="relative z-10 flex flex-col items-center justify-center min-h-screen px-4 py-16">
+    
+    <!-- Heading Section -->
+    <div class="text-center mb-16 max-w-3xl">
+      <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-gray-800">
+        Welcome to <span class="text-orange-500">KJC VOX</span>
+      </h1>
+      <p class="text-xl md:text-2xl lg:text-3xl text-gray-600 font-medium">
+        A Safe space for Students to share honest feedback
       </p>
-      <p class="text-gray-600 leading-relaxed">Our mission is to foster a culture of continuous improvement...</p>
     </div>
-    <div class="bg-gray-800 text-white rounded-xl p-10 flex items-center justify-center text-center text-lg leading-relaxed">
-      Our Vision:<br />Transforming Education<br />Through Feedback
-    </div>
-  </div>
-</section>
 
-<!-- Footer -->
-<footer class="bg-gray-800 text-white text-center py-4 mt-auto">
-  © KJC VOX. All rights reserved.
-</footer>
+    <!-- Button at Bottom -->
+    <div class="mt-auto">
+      <a href="/role-selection">
+        <button 
+          class="px-8 py-4 md:px-10 md:py-5 bg-orange-500 hover:bg-orange-600 text-white text-lg md:text-xl font-bold rounded-full shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300"
+        >
+          Choose your role
+        </button>
+      </a>
+    </div>
+    
+  </div>
+
+</section>

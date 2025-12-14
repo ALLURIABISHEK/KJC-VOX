@@ -1,5 +1,5 @@
 <!-- Navbar -->
-<header class="flex flex-wrap justify-between items-center px-8 py-3 bg-white border-b border-gray-300">
+<header class="flex flex-wrap justify-between items-center px-8 py-3 bg-white border-b border-gray-300 shadow-sm">
     <div class="flex items-center gap-3">
       <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXuH55vOVHO2LCF7rxvEYAfpEZqj3qvRuKnw&s" alt="KJC Logo" class="h-[50px]" />
       <h2 class="text-2xl font-bold">
@@ -7,31 +7,41 @@
         <span class="text-[#f7b928]">VOX</span>
       </h2>
     </div>
-    <img src="assets\AdminIcon.jpg" alt="User Avatar" class="h-[45px] w-[45px] rounded-full object-cover border-2 border-[#1d2d50]" />
+    <div class="relative">
+      <img src="assets\AdminIcon.jpg" alt="User Avatar" class="h-[45px] w-[45px] rounded-full object-cover border-2 border-[#1d2d50] hover:scale-110 transition-transform duration-300 cursor-pointer" (click)="toggleLogout()" />
+      <div *ngIf="showLogout" class="absolute right-0 mt-2 w-40 bg-white rounded-lg shadow-lg border border-gray-200 py-2 z-50">
+        <button (click)="logout()" class="w-full text-left px-4 py-2 text-sm text-[#1d2d50] hover:bg-gray-100 transition-colors flex items-center gap-2">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
+          </svg>
+          Logout
+        </button>
+      </div>
+    </div>
   </header>
   
   <!-- Blue section & white box reordered for mobile -->
-  <section class="bg-[#2d4566] text-white px-6 sm:px-10 py-10 rounded-b-2xl flex flex-col-reverse sm:flex-row gap-8 sm:gap-10 justify-between">
+  <section class="bg-gradient-to-r from-[#2d4566] to-[#1d3a5c] text-white px-6 sm:px-10 py-10 rounded-b-2xl flex flex-col-reverse sm:flex-row gap-8 sm:gap-10 justify-between shadow-lg">
     <!-- Blue Greeting Box -->
     <div class="flex flex-col sm:flex-row items-center gap-6 flex-1">
-      <img src="assets/Handsign.png" alt="Character Illustration" class="h-[170px] sm:h-[170px]" />
+      <img src="assets/Handsign.png" alt="Character Illustration" class="h-[170px] sm:h-[170px] animate-wave" />
       <div class="text-center sm:text-left">
         <h2 *ngIf="userName; else fallback" class="text-3xl font-semibold">Hello, {{ userName }}</h2>
         <ng-template #fallback><h2 class="text-3xl font-semibold">Welcome!</h2></ng-template>
         <p class="my-4 text-base">This is your personalized space on Vox to share feedback, track your classroom experience, and contribute to academic improvement.</p>
-        <button class="px-5 py-2 border-2 border-white text-white rounded-lg font-semibold hover:bg-white hover:text-[#2d4566] transition">Let your voice be heard anonymously and meaningfully</button>
+        <button class="px-5 py-2 border-2 border-white text-white rounded-lg font-semibold hover:bg-white hover:text-[#2d4566] transition-all duration-300 hover:shadow-lg">Let your voice be heard anonymously and meaningfully</button>
       </div>
     </div>
   
     <!-- White Box (should appear first on mobile) -->
-    <div class="bg-[#cfdce6] text-[#1d2d50] p-6 rounded-2xl max-w-lg shadow-md flex-1">
+    <div class="bg-[#cfdce6] text-[#1d2d50] p-6 rounded-2xl max-w-lg shadow-md flex-1 hover:shadow-xl transition-shadow duration-300">
       <h4 class="text-lg font-bold text-center mb-5">Ready to share your thoughts?</h4>
       <div class="flex justify-around flex-wrap gap-5">
-        <div class="text-center flex-1">
+        <div class="text-center flex-1 hover:scale-105 transition-transform duration-300 cursor-pointer">
           <img src="assets/RightMsg.png" alt="Feedback Icon" class="w-20 mx-auto mb-2" />
           <p>Start your<br />feedback<br />for today</p>
         </div>
-        <div class="text-center flex-1">
+        <div class="text-center flex-1 hover:scale-105 transition-transform duration-300 cursor-pointer">
           <img src="assets/RightEmoji.png" alt="Emotion Icon" class="w-20 mx-auto mb-2" />
           <p>Let your<br />emotions<br />be connected</p>
         </div>
@@ -39,56 +49,97 @@
     </div>
   </section>
   
-  <!-- Feature Cards & Image -->
+  <!-- Feature Cards & Image with Quote -->
   <section class="flex flex-wrap justify-center sm:justify-between gap-8 p-10">
     <div class="flex flex-col sm:flex-row flex-wrap gap-6 items-center sm:items-start justify-center sm:justify-start max-w-full sm:max-w-[55%]">
-      <div class="bg-white border-4 border-[#cdd6e2] rounded-2xl w-[180px] p-6 text-center shadow-md cursor-pointer" (click)="goToMySubjects()">
+      <div class="bg-white border-4 border-[#cdd6e2] rounded-2xl w-[180px] p-6 text-center shadow-md cursor-pointer hover:shadow-xl hover:border-[#2d4566] hover:-translate-y-2 transition-all duration-300" (click)="goToMySubjects()">
         <img src="assets/AllStudents.png" alt="Subjects" class="h-[100px] mx-auto mb-3" />
         <h4 class="text-[#1d2d50] text-base font-semibold">All Subjects</h4>
       </div>
-      <div class="bg-white border-4 border-[#cdd6e2] rounded-2xl w-[180px] p-6 text-center shadow-md">
-        <img src="assets/My Feedback.png" alt="Feedback" class="h-[100px] mx-auto mb-3" />
-        <h4 class="text-[#1d2d50] text-base font-semibold">My Feedback</h4>
-      </div>
-      <div class="bg-white border-4 border-[#cdd6e2] rounded-2xl w-[180px] p-6 text-center shadow-md">
-        <img src="assets/Reports.png" alt="Issue" class="h-[100px] mx-auto mb-3" />
-        <h4 class="text-[#1d2d50] text-base font-semibold">Report Issue</h4>
+    <div 
+  class="bg-white border-4 border-[#cdd6e2] rounded-2xl w-[180px] p-6 text-center shadow-md cursor-pointer hover:shadow-xl hover:border-[#2d4566] hover:-translate-y-2 transition-all duration-300"
+  routerLink="/feedback-history"
+>
+  <img src="assets/My Feedback.png" alt="Feedback" class="h-[100px] mx-auto mb-3" />
+  <h4 class="text-[#1d2d50] text-base font-semibold">My Feedback</h4>
+</div>
+
+     
+      <!-- Motivational Quote Card - Wider 4th Card -->
+      <div class="bg-gradient-to-br from-[#2d4566] to-[#1d3a5c] border-4 border-[#cdd6e2] rounded-2xl w-[400px] p-6 shadow-md hover:shadow-xl hover:-translate-y-2 transition-all duration-300 flex flex-col justify-center items-center">
+        <svg class="h-10 w-10 text-[#f7b928] mb-3" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+        </svg>
+        <p class="text-white text-base font-medium leading-relaxed text-center mb-3 px-2">"Success is not final, failure is not fatal: it is the courage to continue that counts."</p>
+        <p class="text-[#f7b928] text-sm font-semibold">- Winston Churchill</p>
       </div>
     </div>
   
-    <div class="w-full sm:w-[40%]">
-      <img src="assets/Width-KJC.png" alt="Campus" class="w-full rounded-2xl shadow-md" />
+    <div class="w-full sm:w-[40%] sm:-ml-8">
+      <img src="assets/Width-KJC.png" alt="Campus" class="w-full rounded-2xl shadow-lg hover:shadow-2xl transition-shadow duration-300" />
     </div>
   </section>
   
   <!-- Announcements Section -->
-  <section class="flex flex-wrap gap-6 justify-between px-8 py-6">
-    <div class="flex flex-col sm:flex-row items-center sm:items-start gap-5 flex-1 bg-white border-2 border-[#cdd6e2] p-5 rounded-xl">
+  <section class="flex flex-wrap gap-6 justify-between px-8 py-2">
+    <div class="flex flex-col sm:flex-row items-center sm:items-start gap-5 flex-1 bg-white border-2 border-[#cdd6e2] p-5 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
       <img src="assets/Mic-Dash.png" alt="Announcement Icon" class="h-[200px] sm:h-[200px]" />
       <div>
-        <h3 class="text-lg font-semibold mb-3">Announcements</h3>
+        <h3 class="text-lg font-semibold mb-3 text-[#1d2d50]">Announcements</h3>
         <ul class="list-none text-sm leading-7">
-          <li><span class="mr-1">🔔</span> Haven’t submitted mood logs this week? <span class="text-red-600 font-semibold">Don’t forget to check in!</span></li>
-          <li><span class="mr-1">🔔</span> Semester feedback deadline is July 30, 2025. <span class="text-blue-600 font-semibold">Submit before it closes!</span></li>
-          <li><span class="mr-1">🔔</span> Your feedback is 100% anonymous and valuable. <span class="font-semibold">Let your voice be heard.</span></li>
+          <li class="hover:bg-gray-50 p-2 rounded transition-colors"><span class="mr-1">🔔</span> Haven't submitted mood logs this week? <span class="text-red-600 font-semibold">Don't forget to check in!</span></li>
+          <li class="hover:bg-gray-50 p-2 rounded transition-colors"><span class="mr-1">🔔</span> Semester feedback deadline is July 30, 2025. <span class="text-blue-600 font-semibold">Submit before it closes!</span></li>
+          <li class="hover:bg-gray-50 p-2 rounded transition-colors"><span class="mr-1">🔔</span> Your feedback is 100% anonymous and valuable. <span class="font-semibold">Let your voice be heard.</span></li>
         </ul>
       </div>
     </div>
   
-<div class="flex-1 bg-[#354b63] text-white p-5 rounded-xl border-2 border-[#cdd6e2] text-sm">
-  <ul class="list-none">
-    <li *ngFor="let notice of notices">
-      <span class="mr-1">➤</span>
-      <strong>{{ notice.title }}</strong>: {{ notice.description }} 
-      <span class="ml-2 text-xs">[{{ notice.date }}]</span>
-    </li>
-  </ul>
-</div>
-
-
+    <div class="flex flex-col sm:flex-row items-start gap-5 flex-1 bg-white border-2 border-[#cdd6e2] p-5 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
+      <img src="assets/assignn.png" alt="Assignment Icon" class="h-[180px] sm:h-[180px] flex-shrink-0" />
+      <div class="flex-1 min-h-[180px]">
+        <h3 class="text-lg font-semibold mb-3 text-[#1d2d50]">Upcoming Assignments</h3>
+        <div class="max-h-[140px] overflow-y-auto pr-2 custom-scrollbar">
+          <ul class="list-none text-sm space-y-2">
+            <li *ngFor="let notice of notices; let i = index" class="hover:bg-gray-50 p-2 rounded transition-colors">
+              <span class="mr-1 text-[#2d4566]">➤</span>
+              <strong class="text-[#1d2d50]">{{ notice.title }}</strong>: 
+              <span class="text-gray-700">{{ notice.description }}</span>
+              <span class="ml-2 text-xs text-gray-500">[{{ notice.date }}]</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
   </section>
   
   <!-- Footer -->
   <footer class="bg-[#1d2d50] text-white text-center text-sm py-4 mt-5">
     © KJC VOX. All rights reserved.
   </footer>
+
+  <style>
+    @keyframes wave {
+      0%, 100% { transform: rotate(0deg); }
+      25% { transform: rotate(5deg); }
+      75% { transform: rotate(-5deg); }
+    }
+    .animate-wave {
+      animation: wave 2s ease-in-out infinite;
+    }
+    
+    /* Custom Scrollbar */
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-radius: 10px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #2d4566;
+      border-radius: 10px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+      background: #1d2d50;
+    }
+  </style>

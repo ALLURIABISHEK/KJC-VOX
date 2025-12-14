@@ -5,11 +5,8 @@
     <h1 class="text-2xl font-bold text-yellow-600">KJC <span class="text-[#00438c]">VOX</span></h1>
   </div>
 
-  <!-- Profile Dropdown -->
   <div class="relative" (click)="toggleDropdown()">
-    <img src="assets\AdminIcon.jpg" alt="User Avatar" class="w-10 h-10 rounded-full border-2 border-[#00438c] cursor-pointer">
-
-    <!-- Dropdown Menu -->
+    <img src="assets/AdminIcon.jpg" alt="User Avatar" class="w-10 h-10 rounded-full border-2 border-[#00438c] cursor-pointer hover:scale-110 transition-transform">
     <div *ngIf="dropdownOpen" class="absolute right-0 mt-2 w-32 bg-white rounded-md shadow-lg border border-gray-200 z-50">
       <button (click)="logout()" class="block w-full px-4 py-2 text-sm text-left hover:bg-gray-100 text-red-600 font-medium">
         Logout
@@ -18,88 +15,151 @@
   </div>
 </header>
 
-
 <!-- Greeting Banner -->
-<section class="relative flex flex-col md:flex-row items-center md:items-start bg-[#2e4663] text-white px-4 md:px-20 py-8 mt-5 mx-5 rounded-2xl gap-6 overflow-hidden">
-  <img src="assets\adminpara.png" alt="Checklist" class="w-28 md:absolute md:left-14 md:top-1/2 transform md:-translate-y-1/2">
-  <div class="text-center md:text-left md:ml-32">
+<section class="relative flex flex-col md:flex-row items-center md:items-start bg-gradient-to-r from-[#1e3a5f] via-[#2e4663] to-[#3d5a80] text-white px-4 md:px-20 py-8 mt-5 mx-5 rounded-2xl gap-6 overflow-hidden shadow-xl">
+  <div class="absolute top-0 right-0 w-64 h-64 bg-white opacity-5 rounded-full -mr-32 -mt-32"></div>
+  <img src="assets/adminpara.png" alt="Checklist" class="w-28 md:absolute md:left-14 md:top-1/2 transform md:-translate-y-1/2 drop-shadow-lg">
+  <div class="text-center md:text-left md:ml-32 relative z-10">
     <h2 class="text-3xl md:text-4xl font-bold">
       <span class="text-yellow-400">Hello,</span>
       <span class="text-white font-bold">{{ adminName }}</span>
     </h2>
-    <p class="text-base mt-2 font-medium">Manage everything from one place — feedback, users, departments, and reports.</p>
+    <p class="text-base mt-2 font-medium opacity-90">Manage everything from one place — feedback, users, departments, and reports.</p>
+  </div>
+</section>
+
+<!-- Stats Cards Row -->
+<section class="px-5 mt-8">
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+    <div class="bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl p-4 text-white shadow-lg hover:shadow-xl transition-shadow">
+      <div class="flex items-center justify-between">
+        <div>
+          <p class="text-sm opacity-90">Total Students</p>
+          <p class="text-3xl font-bold mt-1">{{ dashboardStats?.totalStudents || 0 }}</p>
+        </div>
+        <div class="bg-white/20 p-3 rounded-lg">
+          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl p-4 text-white shadow-lg hover:shadow-xl transition-shadow">
+      <div class="flex items-center justify-between">
+        <div>
+          <p class="text-sm opacity-90">Total Faculty</p>
+          <p class="text-3xl font-bold mt-1">{{ dashboardStats?.totalFaculty || 0 }}</p>
+        </div>
+        <div class="bg-white/20 p-3 rounded-lg">
+          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-gradient-to-br from-green-500 to-green-600 rounded-xl p-4 text-white shadow-lg hover:shadow-xl transition-shadow">
+      <div class="flex items-center justify-between">
+        <div>
+          <p class="text-sm opacity-90">Departments</p>
+          <p class="text-3xl font-bold mt-1">{{ dashboardStats?.totalDepartments || 0 }}</p>
+        </div>
+        <div class="bg-white/20 p-3 rounded-lg">
+          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl p-4 text-white shadow-lg hover:shadow-xl transition-shadow">
+      <div class="flex items-center justify-between">
+        <div>
+          <p class="text-sm opacity-90">Total Subjects</p>
+          <p class="text-3xl font-bold mt-1">{{ dashboardStats?.totalSubjects || 0 }}</p>
+        </div>
+        <div class="bg-white/20 p-3 rounded-lg">
+          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+          </svg>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
 <!-- Cards + Campus Image -->
-<section class="flex flex-col lg:flex-row justify-between gap-6 mt-8 px-5">
-  <!-- Shortcut Cards -->
-  <div class="flex flex-wrap gap-20 justify-center flex-1">
-    <!-- Add Faculty Card -->
-    <a href="/add-faculty" class="bg-gradient-to-b from-[#003366] to-[#66ccff] p-[2px] rounded-xl shadow-md hover:-translate-y-1 transition-all w-44">
-      <div class="bg-white rounded-xl p-4 text-center shadow-md">
-        <img src="assets\Adminfac.png" class="w-20 h-20 mx-auto" />
-        <p class="mt-2 font-semibold text-base">Add Faculty</p>
+<section class="flex flex-col lg:flex-row justify-between gap-6 px-5">
+  <div class="flex flex-wrap gap-6 justify-center flex-1">
+    <a href="/add-faculty" class="group bg-gradient-to-b from-[#003366] to-[#66ccff] p-[2px] rounded-xl shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 w-40">
+      <div class="bg-white rounded-xl p-4 text-center h-full">
+        <img src="assets/Adminfac.png" class="w-16 h-16 mx-auto group-hover:scale-110 transition-transform duration-300" />
+        <p class="mt-3 font-semibold text-sm text-gray-700">Add Faculty</p>
       </div>
     </a>
     
-    <!-- Department Card -->
-    <a href="/manage-department" class="bg-gradient-to-b from-[#003366] to-[#66ccff] p-[2px] rounded-xl shadow-md hover:-translate-y-1 transition-all w-44">
-      <div class="bg-white rounded-xl p-4 text-center shadow-md">
-        <img src="assets\admindept.png" class="w-20 h-20 mx-auto" />
-        <p class="mt-2 font-semibold text-base">Department</p>
+    <a href="/manage-department" class="group bg-gradient-to-b from-[#003366] to-[#66ccff] p-[2px] rounded-xl shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 w-40">
+      <div class="bg-white rounded-xl p-4 text-center h-full">
+        <img src="assets/admindept.png" class="w-16 h-16 mx-auto group-hover:scale-110 transition-transform duration-300" />
+        <p class="mt-3 font-semibold text-sm text-gray-700">Department</p>
       </div>
     </a>
     
-    <!-- Add Notices Card -->
-    <a href="/notice" class="bg-gradient-to-b from-[#003366] to-[#66ccff] p-[2px] rounded-xl shadow-md hover:-translate-y-1 transition-all w-44">
-      <div class="bg-white rounded-xl p-4 text-center shadow-md">
-        <img src="assets\adminannounce.png" class="w-20 h-20 mx-auto" />
-        <p class="mt-2 font-semibold text-base">Add Notices</p>
+    <a href="/notice" class="group bg-gradient-to-b from-[#003366] to-[#66ccff] p-[2px] rounded-xl shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 w-40">
+      <div class="bg-white rounded-xl p-4 text-center h-full">
+        <img src="assets/adminannounce.png" class="w-16 h-16 mx-auto group-hover:scale-110 transition-transform duration-300" />
+        <p class="mt-3 font-semibold text-sm text-gray-700">Add Notices</p>
       </div>
     </a>
     
-    <!-- Add Subjects Card -->
-    <a href="/assign-subjects" class="bg-gradient-to-b from-[#003366] to-[#66ccff] p-[2px] rounded-xl shadow-md hover:-translate-y-1 transition-all w-44">
-      <div class="bg-white rounded-xl p-4 text-center shadow-md">
-        <img src="assets\adminsubjects.png" class="w-20 h-20 mx-auto" />
-        <p class="mt-2 font-semibold text-base">Add Subjects</p>
+    <a href="/assign-subjects" class="group bg-gradient-to-b from-[#003366] to-[#66ccff] p-[2px] rounded-xl shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 w-40">
+      <div class="bg-white rounded-xl p-4 text-center h-full">
+        <img src="assets/adminsubjects.png" class="w-16 h-16 mx-auto group-hover:scale-110 transition-transform duration-300" />
+        <p class="mt-3 font-semibold text-sm text-gray-700">Add Subjects</p>
       </div>
     </a>
     
-    <!-- View Issues Card -->
-   <div class="bg-gradient-to-b from-[#003366] to-[#66ccff] p-[2px] rounded-xl shadow-md hover:-translate-y-1 transition-all w-44">
-  <div class="bg-white rounded-xl p-4 text-center shadow-md">
-    <img src="assets\Reports.png" class="w-20 h-20 mx-auto" />
-    <p class="mt-2 font-semibold text-base">View Issues</p>
-  </div>
-</div>
+   
   </div>
 
-  <!-- Campus Image -->
   <div class="flex justify-center items-center flex-shrink-0">
-    <img src="assets\adminkjc.jpg" alt="Campus" class="rounded-xl shadow-md w-full max-w-sm">
+    <img src="assets/adminkjc.jpg" alt="Campus" class="rounded-2xl shadow-2xl w-full max-w-sm hover:scale-105 transition-transform duration-300">
   </div>
 </section>
 
-<!-- Charts -->
-<section class="flex flex-wrap justify-center gap-10 px-5 mt-10 overflow-x-auto">
-  <div class="bg-white border border-gray-300 rounded-[40px] p-4 w-[320px] h-[300px] shadow-md">
-    <img src="assets\AdminPIE.png" alt="Chart" class="h-[90%] w-full object-contain">
-  </div>
-  <div class="bg-white border border-gray-300 rounded-[40px] p-4 w-[320px] h-[300px] shadow-md">
-    <img src="assets\AdminPIE.png" alt="Chart" class="h-[90%] w-full object-contain">
-  </div>
-  <div class="bg-white border border-gray-300 rounded-[40px] p-4 w-[320px] h-[300px] shadow-md">
-    <img src="assets\AdminPIE.png" alt="Chart" class="h-[90%] w-full object-contain">
-  </div>
-  <div class="bg-white border border-gray-300 rounded-[40px] p-4 w-[320px] h-[300px] shadow-md">
-    <img src="assets\AdminPIE.png" alt="Chart" class="h-[90%] w-full object-contain">
+<!-- Charts Section -->
+<section class="px-5 mt-10">
+  <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">Analytics Dashboard</h3>
+  
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+    <!-- Chart 1: Student Distribution by Class -->
+    <div class="bg-white rounded-2xl p-6 shadow-xl border border-gray-100">
+      <h4 class="text-lg font-semibold text-gray-700 mb-4">Student Distribution by Class</h4>
+      <canvas id="studentDistributionChart" class="w-full" style="max-height: 300px;"></canvas>
+    </div>
+
+    <!-- Chart 2: Faculty Distribution -->
+    <div class="bg-white rounded-2xl p-6 shadow-xl border border-gray-100">
+      <h4 class="text-lg font-semibold text-gray-700 mb-4">Faculty by Department Type</h4>
+      <canvas id="facultyDistributionChart" class="w-full" style="max-height: 300px;"></canvas>
+    </div>
+
+    <!-- Chart 3: Semester-wise Distribution -->
+    <div class="bg-white rounded-2xl p-6 shadow-xl border border-gray-100">
+      <h4 class="text-lg font-semibold text-gray-700 mb-4">Semester-wise Student Count</h4>
+      <canvas id="semesterDistributionChart" class="w-full" style="max-height: 300px;"></canvas>
+    </div>
+
+    <!-- Chart 4: Department Overview -->
+    <div class="bg-white rounded-2xl p-6 shadow-xl border border-gray-100">
+      <h4 class="text-lg font-semibold text-gray-700 mb-4">Department Overview</h4>
+      <canvas id="departmentOverviewChart" class="w-full" style="max-height: 300px;"></canvas>
+    </div>
   </div>
 </section>
-
 
 <!-- Footer -->
-<footer class="bg-[#2e4663] text-white text-center py-4 mt-10 rounded-t-2xl font-medium">
+<footer class="bg-gradient-to-r from-[#1e3a5f] via-[#2e4663] to-[#3d5a80] text-white text-center py-6 mt-12 rounded-t-2xl font-medium shadow-2xl">
   <p>© KJC VOX. All rights reserved.</p>
 </footer>
